@@ -22,4 +22,4 @@ classifiers = [
 "Bug Tracker" = "https://github.com/lunarserge/facere-sensum/issues"
 
 [tool.hatch.version]
-path = "src/facere-sensum/facere-sensum.py"
+path = "src/facere_sensum/facere_sensum.py"
