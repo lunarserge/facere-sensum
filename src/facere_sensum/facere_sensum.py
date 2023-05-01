@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 '''
 facere-sensum: make sense of the turmoil.
 '''
