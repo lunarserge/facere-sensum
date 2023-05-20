@@ -21,5 +21,11 @@ classifiers = [
 "Homepage" = "https://github.com/lunarserge/facere-sensum"
 "Bug Tracker" = "https://github.com/lunarserge/facere-sensum/issues"
 
+[project.scripts]
+facere-sensum = "facere_sensum.facere_sensum:main"
+
 [tool.hatch.version]
 path = "src/facere_sensum/facere_sensum.py"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
