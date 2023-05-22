@@ -4,7 +4,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "facere-sensum"
-dynamic = ["version"]
+dynamic = [
+    "version",
+    "dependencies"
+]
 authors = [
   { name = "Serge Lunev" },
 ]
