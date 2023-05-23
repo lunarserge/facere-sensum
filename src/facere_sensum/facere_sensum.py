@@ -4,6 +4,7 @@
 facere-sensum: make sense of the turmoil.
 '''
 
+import sys
 from argparse import ArgumentParser
 import datetime
 import numpy as np
@@ -11,7 +12,7 @@ import pandas as pd
 
 VERSION = '0.0.4'
 
-def score_manual(metric):
+def score_manual(metric): # pragma: no cover - function is replaced by automated data in tests
     '''
     Get metric score as a direct user input.
     'metric' is the metric text description.
@@ -44,7 +45,11 @@ def score_combined(log_file, marker):
     Return combined score.
     'marker' is the identificator to be used with the scoring (e.g., the date of data collection).
     '''
-    data = pd.read_csv(log_file)
+    try:
+        data = pd.read_csv(log_file)
+    except FileNotFoundError:
+        print('Log file \''+log_file+'\' not found. Exiting.')
+        sys.exit(1)
 
     # Infer metrics from priority column names.
     metrics = [s[2:-1] for s in data.columns[1:-1:2]]
@@ -95,3 +100,6 @@ def main():
 
     score_combined(parser.parse_args().log, datetime.date.today())
     print('\nSee you next time!')
+
+if __name__ == '__main__':
+    main()
