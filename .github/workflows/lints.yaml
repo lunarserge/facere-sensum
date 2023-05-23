@@ -22,7 +22,7 @@ jobs:
 
       - name: Run Pylint static code analyser
         run: |
-          pip install pylint
+          pip install coverage pylint
           pylint src/facere_sensum test
       - name: Run Bandit security analyser
         run: |
