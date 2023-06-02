@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-requirements-txt"]
 build-backend = "hatchling.build"
 
 [project]
@@ -30,5 +30,5 @@ facere-sensum = "facere_sensum.facere_sensum:main"
 [tool.hatch.version]
 path = "src/facere_sensum/facere_sensum.py"
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["requirements.txt"]
