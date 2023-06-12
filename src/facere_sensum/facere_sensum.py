@@ -14,7 +14,7 @@ import pandas as pd
 
 VERSION = '0.0.5'
 
-def score_manual(metric):
+def score_manual(metric): # pragma: no cover - function is replaced by automated data in tests
     '''
     Get metric score as a direct user input.
     'metric' is the metric text description.
@@ -73,7 +73,11 @@ def command_update(log_file, marker):
     'log_file' is the name for the log.
     'marker' is the identificator to be used with the scoring (e.g., the date of data collection).
     '''
-    data = pd.read_csv(log_file)
+    try:
+        data = pd.read_csv(log_file)
+    except FileNotFoundError:
+        print('Log file \''+log_file+'\' not found. Exiting.')
+        sys.exit(1)
 
     # Infer metrics from priority column names.
     metrics = [s[2:-1] for s in data.columns[1:-1:2]]
@@ -142,3 +146,6 @@ def main():
         assert 0 # should never get here given that all the actions are processed above
 
     print('\nSee you next time!')
+
+if __name__ == '__main__':
+    main()
