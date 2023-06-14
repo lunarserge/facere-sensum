@@ -5,12 +5,14 @@ facere-sensum: make sense of the turmoil.
 '''
 
 import sys
+import json
+import csv
 from argparse import ArgumentParser
 import datetime
 import numpy as np
 import pandas as pd
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 def score_manual(metric): # pragma: no cover - function is replaced by automated data in tests
     '''
@@ -39,10 +41,39 @@ def _compute_new_priorities(priorities, scores):
     coeff = sum(priorities)
     return list(map(lambda priority: priority/coeff, priorities))
 
-def score_combined(log_file, marker):
+def command_create(config, log_file):
+    '''
+    Create the CSV log file using provided config.
+    'config' is config in JSON form.
+    'log_file' is the name for the log.
+    '''
+    with open(log_file, 'w', encoding='utf-8', newline='') as log:
+        writer = csv.writer(log)
+
+        # Write header row.
+        row = ['ID']
+        for metric in config['metrics']:
+            qualifier = '(' + metric['id'] + ')'
+            row.append('P' + qualifier)
+            row.append('S' + qualifier)
+        row.append('Score')
+        writer.writerow(row)
+
+        # Write first row with initial priorities.
+        row = ['']
+        for metric in config['metrics']:
+            row.append(metric['priority'])
+            row.append('')
+        row.append('')
+        writer.writerow(row)
+
+    print(log_file, 'is created')
+
+def command_update(log_file, marker):
     '''
     Process the log file by scoring all the metrics and updating priorities for the future.
     Return combined score.
+    'log_file' is the name for the log.
     'marker' is the identificator to be used with the scoring (e.g., the date of data collection).
     '''
     try:
@@ -94,12 +125,33 @@ def main():
     CLI entry.
     '''
     parser = ArgumentParser(description='Make sense of the turmoil')
+    parser.add_argument('command', choices=['create', 'update'],
+                        help='high-level action to perform')
     parser.add_argument('--version', action='version', version='%(prog)s '+VERSION)
-    parser.add_argument('log', nargs='?', default='log.csv',
-                        help='log file in CSV format (default: log.csv)')
+    parser.add_argument('--config', nargs='?', default='config.json',
+                        help='metrics config (see README for details, default: config.json)')
+    parser.add_argument('--log', nargs='?', default='log.csv',
+                        help='CSV log file name (default: log.csv)')
+    args = parser.parse_args()
 
-    score_combined(parser.parse_args().log, datetime.date.today())
-    print('\nSee you next time!')
+    try:
+        with open(args.config, encoding='utf-8') as config:
+            config = json.load(config)
+    except FileNotFoundError:
+        print('Config file \''+args.config+'\' not found. Exiting.')
+        sys.exit(1)
+
+    if args.command == 'create':
+        command_create(config, args.log)
+    elif args.command == 'update':
+        command_update(args.log, datetime.date.today())
+        print('\nSee you next time!')
+    else:
+        # Should never get here given that all the actions are processed above.
+        print('Something weird happened.',
+              'Please submit an issue at https://github.com/lunarserge/facere-sensum/issues/new',
+              'with the command that led here.')
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,16 @@
+{
+    "metrics": [
+        {
+            "id": "Self-Development",
+            "priority": 0.4
+        },
+        {
+            "id": "Family Time",
+            "priority": 0.3
+        },
+        {
+            "id": "Job Deliverables",
+            "priority": 0.3
+        }
+    ]
+}
