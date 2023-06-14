@@ -47,15 +47,15 @@ def command_create(config, log_file):
     'config' is config in JSON form.
     'log_file' is the name for the log.
     '''
-    with open(log_file, 'w', newline='') as log:
+    with open(log_file, 'w', encoding='utf-8', newline='') as log:
         writer = csv.writer(log)
 
         # Write header row.
         row = ['ID']
         for metric in config['metrics']:
-            m = '(' + metric['id'] + ')'
-            row.append('P' + m)
-            row.append('S' + m)
+            qualifier = '(' + metric['id'] + ')'
+            row.append('P' + qualifier)
+            row.append('S' + qualifier)
         row.append('Score')
         writer.writerow(row)
 
@@ -64,7 +64,10 @@ def command_create(config, log_file):
         for metric in config['metrics']:
             row.append(metric['priority'])
             row.append('')
+        row.append('')
         writer.writerow(row)
+
+    print(log_file, 'is created')
 
 def command_update(log_file, marker):
     '''
@@ -132,7 +135,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        with open(args.config) as config:
+        with open(args.config, encoding='utf-8') as config:
             config = json.load(config)
     except FileNotFoundError:
         print('Config file \''+args.config+'\' not found. Exiting.')
@@ -142,10 +145,13 @@ def main():
         command_create(config, args.log)
     elif args.command == 'update':
         command_update(args.log, datetime.date.today())
+        print('\nSee you next time!')
     else:
-        assert 0 # should never get here given that all the actions are processed above
-
-    print('\nSee you next time!')
+        # Should never get here given that all the actions are processed above.
+        print('Something weird happened.',
+              'Please submit an issue at https://github.com/lunarserge/facere-sensum/issues/new',
+              'with the command that led here.')
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()
