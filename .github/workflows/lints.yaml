@@ -10,6 +10,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  PYTHONPATH: src:test
+
 jobs:
   pylint:
     runs-on: ubuntu-latest
