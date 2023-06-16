@@ -5,6 +5,7 @@ facere-sensum: make sense of the turmoil.
 '''
 
 import sys
+import importlib
 import json
 import csv
 from argparse import ArgumentParser
@@ -13,17 +14,6 @@ import numpy as np
 import pandas as pd
 
 VERSION = '0.0.5'
-
-def score_manual(metric): # pragma: no cover - function is replaced by automated data in tests
-    '''
-    Get metric score as a direct user input.
-    'metric' is the metric text description.
-    '''
-    while True:
-        score = float(input(f'  - {metric}: '))
-        if 0 <= score <= 1:
-            return score
-        print('Entered score is outside 0..1 range, enter again')
 
 def _compute_new_priorities(priorities, scores):
     '''
@@ -44,7 +34,7 @@ def _compute_new_priorities(priorities, scores):
 def command_create(config, log_file):
     '''
     Create the CSV log file using provided config.
-    'config' is config in JSON form.
+    'config' is project config in JSON form.
     'log_file' is the name for the log.
     '''
     with open(log_file, 'w', encoding='utf-8', newline='') as log:
@@ -69,10 +59,28 @@ def command_create(config, log_file):
 
     print(log_file, 'is created')
 
-def command_update(log_file, marker):
+# Map of pairs: data connector name / connector module.
+_connectors = {}
+
+def score(metric):
+    '''
+    Get metric score.
+    'metric' is the metric JSON description.
+    '''
+    source = metric['source']
+
+    if source == 'const':
+        return metric['value']
+
+    if not source in _connectors:
+        _connectors[source] = importlib.import_module('facere_sensum.connectors.'+source)
+    return _connectors[source].get_value(metric)
+
+def command_update(config, log_file, marker):
     '''
     Process the log file by scoring all the metrics and updating priorities for the future.
     Return combined score.
+    'config' is project config in JSON form.
     'log_file' is the name for the log.
     'marker' is the identificator to be used with the scoring (e.g., the date of data collection).
     '''
@@ -92,7 +100,7 @@ def command_update(log_file, marker):
               f"(sum is ~{priorities_combined:.2f})\n")
 
     print(f'\nEnter scoring for {marker} (each score must be within 0..1 range):')
-    scores = [score_manual(metric) for metric in metrics]
+    scores = [score(metric) for metric in config['metrics']]
     score_comb = np.dot(priorities, scores)
     print(f'\nYour combined score for {marker} is ~{score_comb:.2f}')
 
@@ -144,7 +152,7 @@ def main():
     if args.command == 'create':
         command_create(config, args.log)
     elif args.command == 'update':
-        command_update(args.log, datetime.date.today())
+        command_update(config, args.log, datetime.date.today())
         print('\nSee you next time!')
     else:
         # Should never get here given that all the actions are processed above.

@@ -10,6 +10,7 @@ import subprocess # nosec B404
 import json
 import shutil
 import unittest
+from connectors import t_user
 import facere_sensum.facere_sensum as fs
 
 def _gen_path(file_name):
@@ -37,14 +38,6 @@ def _logs_equal(log1, log2):
         with open(log2, encoding='utf8') as file2:
             return file1.readlines() == file2.readlines()
 
-def _setup_test_input(user_input):
-    '''
-    Mocks direct user input by replacing prompting with a generating from a pre-defined list.
-    'user_input' is a list of values to be used instead of the actual user input.
-    '''
-    user_input = (item for item in user_input)
-    fs.score_manual = lambda metric: next(user_input)
-
 class Test(unittest.TestCase):
     '''
     Test cases.
@@ -64,16 +57,16 @@ class Test(unittest.TestCase):
         shutil.copy(_REF_BASE, _LOG)
 
         # Minimal extreme: all metrics are zero.
-        _setup_test_input([0,0,0])
-        fs.command_update(_LOG, 'A')
+        t_user.mock_up_data([0,0,0])
+        fs.command_update(_CONFIG, _LOG, 'A')
 
         # Maximal extreme: all metrics are one.
-        _setup_test_input([1,1,1])
-        fs.command_update(_LOG, 'B')
+        t_user.mock_up_data([1,1,1])
+        fs.command_update(_CONFIG, _LOG, 'B')
 
         # Various values for metrics.
-        _setup_test_input([.25,.5,.75])
-        fs.command_update(_LOG, 'C')
+        t_user.mock_up_data([.25,.5,.75])
+        fs.command_update(_CONFIG, _LOG, 'C')
 
         # Compare with a reference.
         self.assertTrue(_logs_equal(_LOG, _REF_UPDATED))
