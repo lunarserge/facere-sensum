@@ -1,4 +1,5 @@
 {
+    "log": "log.csv",
     "metrics": [
         {
             "id": "Self-Development",

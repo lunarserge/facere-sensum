@@ -71,18 +71,32 @@ class Test(unittest.TestCase):
         # Compare with a reference.
         self.assertTrue(_logs_equal(_LOG, _REF_UPDATED))
 
-if __name__ == '__main__':
-    print('Integration tests: ', end='')
-
-    # Log file not found test.
-    fs_py = ['python', os.path.join('src', 'facere_sensum', 'facere_sensum.py'),
-             '--log', 'llog.csv', 'update']
-    res = subprocess.run(fs_py, check=False, capture_output=True, text=True).stdout # nosec B603
-    if res == 'Log file \'llog.csv\' not found. Exiting.\n':
+def _test_integration(descr, args, ref):
+    '''
+    Run an integration test.
+    'descr' is test user description.
+    'args' command line arguments to use.
+    'ref' expected output.
+    '''
+    print(descr, end=': ')
+    res = subprocess.run(['python',
+                         os.path.join('src', 'facere_sensum', 'facere_sensum.py')] + args,
+                         check=False, capture_output=True, text=True).stdout # nosec B603
+    if res == ref:
         print('OK')
     else:
-        print('FAILED. Output:', res)
+        print('FAILED', 'Output:', '---', res, '---', 'Expected:', '---', ref, '---', sep='\n')
         sys.exit(1)
+
+if __name__ == '__main__':
+    print('Integration tests:')
+    _test_integration('Authentication config not found',
+                      ['--auth', 'aauth.json', 'update'],
+                      'Authentication config file \'aauth.json\' not found. Exiting.\n')
+    _test_integration('Project config not found',
+                      ['--config', 'cconfig.json', 'update'],
+                      'Project config file \'cconfig.json\' not found. Exiting.\n')
+    _test_integration('Create command', ['--auth', 'auth.json', 'create'], 'log.csv is created\n')
 
     # Unit tests
     unittest.main()
