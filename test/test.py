@@ -91,11 +91,11 @@ def _test_integration(descr, args, ref):
 if __name__ == '__main__':
     print('Integration tests:')
     _test_integration('Authentication config not found',
-                      ['--auth', 'aauth.json', 'update'],
-                      'Authentication config file \'aauth.json\' not found. Exiting.\n')
+                      ['--auth', 'notfound.json', 'update'],
+                      'Authentication config file \'notfound.json\' not found. Exiting.\n')
     _test_integration('Project config not found',
-                      ['--config', 'cconfig.json', 'update'],
-                      'Project config file \'cconfig.json\' not found. Exiting.\n')
+                      ['--config', 'notfound.json', 'update'],
+                      'Project config file \'notfound.json\' not found. Exiting.\n')
     _test_integration('Create command', ['--auth', 'auth.json', 'create'], 'log.csv is created\n')
 
     # Unit tests
