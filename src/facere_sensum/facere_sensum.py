@@ -136,25 +136,33 @@ def main():
     parser.add_argument('command', choices=['create', 'update'],
                         help='high-level action to perform')
     parser.add_argument('--version', action='version', version='%(prog)s '+VERSION)
+    parser.add_argument('--auth', nargs='?', help='authentication config')
     parser.add_argument('--config', nargs='?', default='config.json',
-                        help='metrics config (see README for details, default: config.json)')
-    parser.add_argument('--log', nargs='?', default='log.csv',
-                        help='CSV log file name (default: log.csv)')
+                        help='project config (default: config.json)')
     args = parser.parse_args()
+
+    if args.auth:
+        try :
+            with open(args.auth, encoding='utf-8') as auth:
+                auth = json.load(auth)
+        except FileNotFoundError:
+            print('Authentication config file \''+args.auth+'\' not found. Exiting.')
+            sys.exit(1)
 
     try:
         with open(args.config, encoding='utf-8') as config:
             config = json.load(config)
     except FileNotFoundError:
-        print('Config file \''+args.config+'\' not found. Exiting.')
+        print('Project config file \''+args.config+'\' not found. Exiting.')
         sys.exit(1)
 
+    log = config['log']
     if args.command == 'create':
-        command_create(config, args.log)
+        command_create(config, log)
     elif args.command == 'update':
-        command_update(config, args.log, datetime.date.today())
+        command_update(config, log, datetime.date.today())
         print('\nSee you next time!')
-    else:
+    else: # pragma: no cover
         # Should never get here given that all the actions are processed above.
         print('Something weird happened.',
               'Please submit an issue at https://github.com/lunarserge/facere-sensum/issues/new',
