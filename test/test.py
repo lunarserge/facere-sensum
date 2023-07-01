@@ -10,22 +10,16 @@ import subprocess # nosec B404
 import json
 import shutil
 import unittest
-from connectors import t_user
-import facere_sensum.facere_sensum as fs
+from t_connectors import t_user
+from facere_sensum import fs
 
-def _gen_path(file_name):
-    '''
-    Generate a path inside the testing folder.
-    'file_name' is a name to put into testing.
-    '''
-    return os.path.join('test', file_name)
+# Generate paths for test files.
+_CONFIG_PATH      = os.path.join('examples', 'config_personal.json')
+_LOG_PATH         = 'log.csv'
+_REF_BASE_PATH    = os.path.join('test', 'output', 'ref_base.csv')
+_REF_UPDATED_PATH = os.path.join('test', 'output', 'ref_updated.csv')
 
-# Generate paths for test output and references.
-_LOG         = _gen_path('log.csv')
-_REF_BASE    = _gen_path('ref_base.csv')
-_REF_UPDATED = _gen_path('ref_updated.csv')
-
-with open('config.json', encoding='utf-8') as config:
+with open(_CONFIG_PATH, encoding='utf-8') as config:
     _CONFIG = json.load(config)
 
 def _logs_equal(log1, log2):
@@ -47,29 +41,29 @@ class Test(unittest.TestCase):
         '''
         Test facere_sensum.command_create function.
         '''
-        fs.command_create(_CONFIG, _LOG)
-        self.assertTrue(_logs_equal(_LOG, _REF_BASE))
+        fs.command_create(_CONFIG, _LOG_PATH)
+        self.assertTrue(_logs_equal(_LOG_PATH, _REF_BASE_PATH))
 
     def test_score_combined(self):
         '''
         Test facere_sensum.score_combined function.
         '''
-        shutil.copy(_REF_BASE, _LOG)
+        shutil.copy(_REF_BASE_PATH, _LOG_PATH)
 
         # Minimal extreme: all metrics are zero.
         t_user.mock_up_data([0,0,0])
-        fs.command_update(_CONFIG, _LOG, 'A')
+        fs.command_update(_CONFIG, _LOG_PATH, 'A')
 
         # Maximal extreme: all metrics are one.
         t_user.mock_up_data([1,1,1])
-        fs.command_update(_CONFIG, _LOG, 'B')
+        fs.command_update(_CONFIG, _LOG_PATH, 'B')
 
         # Various values for metrics.
         t_user.mock_up_data([.25,.5,.75])
-        fs.command_update(_CONFIG, _LOG, 'C')
+        fs.command_update(_CONFIG, _LOG_PATH, 'C')
 
         # Compare with a reference.
-        self.assertTrue(_logs_equal(_LOG, _REF_UPDATED))
+        self.assertTrue(_logs_equal(_LOG_PATH, _REF_UPDATED_PATH))
 
 def _test_integration(descr, args, ref):
     '''
@@ -80,7 +74,7 @@ def _test_integration(descr, args, ref):
     '''
     print(descr, end=': ')
     res = subprocess.run(['python',
-                         os.path.join('src', 'facere_sensum', 'facere_sensum.py')] + args,
+                         os.path.join('src', 'facere_sensum', 'fs.py')] + args,
                          check=False, capture_output=True, text=True).stdout # nosec B603
     if res == ref:
         print('OK')
@@ -96,7 +90,8 @@ if __name__ == '__main__':
     _test_integration('Project config not found',
                       ['--config', 'notfound.json', 'update'],
                       'Project config file \'notfound.json\' not found. Exiting.\n')
-    _test_integration('Create command', ['--auth', 'auth.json', 'create'], 'log.csv is created\n')
+    _test_integration('Create command', ['--config', _CONFIG_PATH, 'create'],
+                      'log.csv is created\n')
 
     # Unit tests
     unittest.main()
