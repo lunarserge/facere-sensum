@@ -7,11 +7,12 @@ facere-sensum unit tests.
 import os
 import sys
 import subprocess # nosec B404
+import importlib
 import json
 import shutil
 import unittest
-from t_connectors import t_user
 from facere_sensum import fs
+from facere_sensum.connectors import user as user_connector
 
 # Generate paths for test files.
 _CONFIG_PATH      = os.path.join('examples', 'config_personal.json')
@@ -32,6 +33,14 @@ def _logs_equal(log1, log2):
         with open(log2, encoding='utf8') as file2:
             return file1.readlines() == file2.readlines()
 
+def _mock_up_direct_user_input(data):
+    '''
+    Mock direct user input.
+    'data' is a list of values to be used instead of the actual user input.
+    '''
+    data = (item for item in data)
+    user_connector.get_value = lambda metric: next(data)
+
 class Test(unittest.TestCase):
     '''
     Test cases.
@@ -51,19 +60,32 @@ class Test(unittest.TestCase):
         shutil.copy(_REF_BASE_PATH, _LOG_PATH)
 
         # Minimal extreme: all metrics are zero.
-        t_user.mock_up_data([0,0,0])
+        _mock_up_direct_user_input([0,0,0])
         fs.command_update(_CONFIG, _LOG_PATH, 'A')
 
         # Maximal extreme: all metrics are one.
-        t_user.mock_up_data([1,1,1])
+        _mock_up_direct_user_input([1,1,1])
         fs.command_update(_CONFIG, _LOG_PATH, 'B')
 
         # Various values for metrics.
-        t_user.mock_up_data([.25,.5,.75])
+        _mock_up_direct_user_input([.25,.5,.75])
         fs.command_update(_CONFIG, _LOG_PATH, 'C')
 
         # Compare with a reference.
         self.assertTrue(_logs_equal(_LOG_PATH, _REF_UPDATED_PATH))
+
+    def test_connectors(self):
+        '''
+        Test data connectors.
+        '''
+        # Load sample authentication config file so that all the connectors can load.
+        # Connector loading only needs JSON scheme, not actual credentials.
+        with open('auth.json', encoding='utf-8') as auth_file:
+            fs.auth = json.load(auth_file)
+
+        for file_name in os.listdir(os.path.join('test', 't_connectors')):
+            if file_name.startswith('t_') and file_name.endswith('.py'):
+                self.assertTrue(importlib.import_module('t_connectors.t_'+file_name[2:-3]).test())
 
 def _test_integration(descr, args, ref):
     '''
@@ -73,8 +95,7 @@ def _test_integration(descr, args, ref):
     'ref' expected output.
     '''
     print(descr, end=': ')
-    res = subprocess.run(['python',
-                         os.path.join('src', 'facere_sensum', 'fs.py')] + args,
+    res = subprocess.run(['python', 'fsy.py'] + args,
                          check=False, capture_output=True, text=True).stdout # nosec B603
     if res == ref:
         print('OK')
