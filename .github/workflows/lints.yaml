@@ -26,9 +26,10 @@ jobs:
       - name: Run Pylint static code analyser
         run: |
           pip install coverage pylint
-          pylint src/facere_sensum test
+          pylint src/facere_sensum test fsy.py
       - name: Run Bandit security analyser
         run: |
           pip install bandit
           bandit -r src/facere_sensum
           bandit -r test
+          bandit fsy.py

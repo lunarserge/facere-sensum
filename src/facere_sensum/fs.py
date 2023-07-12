@@ -143,15 +143,17 @@ def main():
 
     if args.auth:
         try :
-            with open(args.auth, encoding='utf-8') as auth:
-                auth = json.load(auth)
+            with open(args.auth, encoding='utf-8') as auth_file:
+                # Put authentication config in global scope
+                # for all other modules to access as necessary.
+                globals()['auth'] = json.load(auth_file)
         except FileNotFoundError:
             print('Authentication config file \''+args.auth+'\' not found. Exiting.')
             sys.exit(1)
 
     try:
-        with open(args.config, encoding='utf-8') as config:
-            config = json.load(config)
+        with open(args.config, encoding='utf-8') as config_file:
+            config = json.load(config_file)
     except FileNotFoundError:
         print('Project config file \''+args.config+'\' not found. Exiting.')
         sys.exit(1)
@@ -168,6 +170,3 @@ def main():
               'Please submit an issue at https://github.com/lunarserge/facere-sensum/issues/new',
               'with the command that led here.')
         sys.exit(1)
-
-if __name__ == '__main__':
-    main()

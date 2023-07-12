@@ -1,0 +1,575 @@
+{
+    "kind": "customsearch#search",
+    "url": {
+        "type": "application/json",
+        "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    },
+    "queries": {
+        "request": [
+            {
+                "title": "Google Custom Search - obstacle course racing",
+                "totalResults": "32800000",
+                "searchTerms": "obstacle course racing",
+                "count": 10,
+                "startIndex": 1,
+                "inputEncoding": "utf8",
+                "outputEncoding": "utf8",
+                "safe": "off",
+                "cx": "d488dea99655943fe"
+            }
+        ],
+        "nextPage": [
+            {
+                "title": "Google Custom Search - obstacle course racing",
+                "totalResults": "32800000",
+                "searchTerms": "obstacle course racing",
+                "count": 10,
+                "startIndex": 11,
+                "inputEncoding": "utf8",
+                "outputEncoding": "utf8",
+                "safe": "off",
+                "cx": "d488dea99655943fe"
+            }
+        ]
+    },
+    "context": {
+        "title": "Serge's Search"
+    },
+    "searchInformation": {
+        "searchTime": 0.320836,
+        "formattedSearchTime": "0.32",
+        "totalResults": "32800000",
+        "formattedTotalResults": "32,800,000"
+    },
+    "items": [
+        {
+            "kind": "customsearch#result",
+            "title": "Obstacle course racing - Wikipedia",
+            "htmlTitle": "<b>Obstacle course racing</b> - Wikipedia",
+            "link": "https://en.wikipedia.org/wiki/Obstacle_course_racing",
+            "displayLink": "en.wikipedia.org",
+            "snippet": "Obstacle course racing (OCR) is a sport in which a competitor, traveling on foot, must overcome various physical challenges in the form of obstacles.",
+            "htmlSnippet": "<b>Obstacle course racing</b> (<b>OCR</b>) is a sport in which a competitor, traveling on foot, must overcome various physical challenges in the form of obstacles.",
+            "cacheId": "fFxpvxmZxD0J",
+            "formattedUrl": "https://en.wikipedia.org/wiki/Obstacle_course_racing",
+            "htmlFormattedUrl": "https://en.wikipedia.org/wiki/<b>Obstacle</b>_<b>course</b>_<b>racing</b>",
+            "pagemap": {
+                "hcard": [
+                    {
+                        "fn": "Obstacle course racing"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "referrer": "origin",
+                        "og:image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Obstacle_race_1.jpg/1200px-Obstacle_race_1.jpg",
+                        "theme-color": "#eaecf0",
+                        "og:image:width": "1200",
+                        "og:type": "website",
+                        "viewport": "width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=0.25, maximum-scale=5.0",
+                        "og:title": "Obstacle course racing - Wikipedia",
+                        "og:image:height": "800",
+                        "format-detection": "telephone=no"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "The OCR World Championships | October 5-9, 2023",
+            "htmlTitle": "The <b>OCR</b> World Championships | October 5-9, 2023",
+            "link": "https://ocrworldchampionships.com/",
+            "displayLink": "ocrworldchampionships.com",
+            "snippet": "Since its inaugural event in 2014, the OCR World Championships has served as the premier independent world championships for the sport of Obstacle Course\u00a0...",
+            "htmlSnippet": "Since its inaugural event in 2014, the <b>OCR</b> World Championships has served as the premier independent world championships for the sport of Obstacle Course&nbsp;...",
+            "cacheId": "mPEIpV9HiuoJ",
+            "formattedUrl": "https://ocrworldchampionships.com/",
+            "htmlFormattedUrl": "https://ocrworldchampionships.com/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF2Cm2Q4hULl27dxw0uj6fdWPq9OHbUH2IveTe1AOTRjexqTBH7XSjBNz9",
+                        "width": "275",
+                        "height": "183"
+                    }
+                ],
+                "organization": [
+                    {
+                        "logo": "https://ocrworld.wpenginepowered.com/wp-content/uploads/2020/04/home-logo.svg",
+                        "url": "Home"
+                    },
+                    {
+                        "logo": "https://ocrworld.wpenginepowered.com/wp-content/uploads/2020/02/black-logo@2x.svg",
+                        "url": "Home"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://ocrworldchampionships.com/wp-content/uploads/2019/09/49649536892_96af079960_c-1.jpg",
+                        "og:type": "website",
+                        "og:image:width": "799",
+                        "twitter:card": "summary_large_image",
+                        "og:site_name": "OCR World Championships",
+                        "og:title": "The OCR World Championships | October 5-9, 2023",
+                        "og:image:height": "533",
+                        "og:image:type": "image/jpeg",
+                        "msapplication-tileimage": "https://ocrworldchampionships.com/wp-content/uploads/2020/04/cropped-index-270x270.png",
+                        "og:description": "The OCR World Championships are the only independent global championships for the sport of Obstacle Course Racing.",
+                        "article:publisher": "https://www.facebook.com/OCRWorldChampionships",
+                        "article:modified_time": "2023-01-19T15:35:31+00:00",
+                        "viewport": "width=device-width, initial-scale=1",
+                        "og:locale": "en_US",
+                        "og:url": "https://ocrworldchampionships.com/"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://ocrworldchampionships.com/wp-content/uploads/2019/09/49649536892_96af079960_c-1.jpg"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "Tough Mudder USA | Mud Run & Obstacle Race",
+            "htmlTitle": "Tough Mudder USA | <b>Mud Run</b> &amp; <b>Obstacle Race</b>",
+            "link": "https://toughmudder.com/",
+            "displayLink": "toughmudder.com",
+            "snippet": "From 5K to 15 miles, Tough Mudder is your best chance to test your teamwork, conquer best-in-class obstacles, and let your inner party animal go wild.",
+            "htmlSnippet": "From 5K to 15 miles, Tough Mudder is your best chance to test your teamwork, conquer best-in-class <b>obstacles</b>, and let your inner party animal go wild.",
+            "cacheId": "UlaL39uA6l4J",
+            "formattedUrl": "https://toughmudder.com/",
+            "htmlFormattedUrl": "https://toughmudder.com/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcStUAnaZRlxnwzYiPT27KGDa3MGA9AMfxPDuyoU3QEGmNebU9lEYjeBO5E_",
+                        "width": "348",
+                        "height": "145"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://toughmudder.com/wp-content/uploads/2022/05/Worlds-Best_Desktop-HERO-web-scaled.jpg",
+                        "og:type": "website",
+                        "og:image:width": "2560",
+                        "twitter:card": "summary_large_image",
+                        "og:site_name": "Tough Mudder",
+                        "og:title": "Tough Mudder USA | Mud Run & Obstacle Race",
+                        "og:image:height": "1067",
+                        "og:image:type": "image/jpeg",
+                        "msapplication-tileimage": "https://toughmudder.com/wp-content/uploads/2021/12/Tough-Mudder-Favicon_new_2022.png",
+                        "og:description": "From 5K to 15 miles, Tough Mudder is your best chance to test your teamwork, conquer best-in-class obstacles, and let your inner party animal go wild.",
+                        "article:modified_time": "2023-07-11T11:22:38+00:00",
+                        "viewport": "width=device-width, initial-scale=1",
+                        "og:locale": "en_US",
+                        "og:url": "https://toughmudder.com/"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://toughmudder.com/wp-content/uploads/2022/05/Worlds-Best_Desktop-HERO-web-scaled.jpg"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "Spartan Race | Become Unbreakable",
+            "htmlTitle": "Spartan <b>Race</b> | Become Unbreakable",
+            "link": "https://www.spartan.com/",
+            "displayLink": "www.spartan.com",
+            "snippet": "Spartan is an extreme wellness platform helping humans become UNBREAKABLE. Commit to Races, Shop Merchandise & Train to be Unbreakable.",
+            "htmlSnippet": "Spartan is an extreme wellness platform helping humans become UNBREAKABLE. Commit to <b>Races</b>, Shop Merchandise &amp; Train to be Unbreakable.",
+            "cacheId": "dDikWufJvm8J",
+            "formattedUrl": "https://www.spartan.com/",
+            "htmlFormattedUrl": "https://www.spartan.com/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9gciiNiLHRw7mJHW0J44hXcTowm7EBxNEHDkf-0hOU2NRAfrNOJ91BtM",
+                        "width": "301",
+                        "height": "167"
+                    }
+                ],
+                "organization": [
+                    {
+                        "url": "Spartan Race | Home"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://cdn.shopify.com/s/files/1/1321/0493/files/Meta_Image_56f176eb-5c59-498a-b281-96d243d9a4f4.jpg?v=1677259204",
+                        "theme-color": "#000000",
+                        "og:type": "website",
+                        "twitter:card": "summary_large_image",
+                        "twitter:title": "Spartan Race | Commit To Your Unbreakable Journey",
+                        "og:image:width": "1200",
+                        "supported-color-schemes": "light",
+                        "og:site_name": "Spartan Race",
+                        "og:title": "Spartan Race | Commit To Your Unbreakable Journey",
+                        "shopify-checkout-api-token": "ed9167d08d7523055fce0a3b16670119",
+                        "og:image:height": "668",
+                        "google": "notranslate",
+                        "color-scheme": "light",
+                        "og:description": "Spartan is an extreme wellness platform helping humans become UNBREAKABLE. Find a race near you and commit to an event. Shop performance &amp; commemorative gear. Learn how to become the most elite version of yourself with our Unbreakable Blog.",
+                        "og:image:secure_url": "https://cdn.shopify.com/s/files/1/1321/0493/files/Meta_Image_56f176eb-5c59-498a-b281-96d243d9a4f4.jpg?v=1677259204",
+                        "facebook-domain-verification": "m6v0apekod6yg8riyrx3r19epu50wf",
+                        "twitter:site": "@spartanrace",
+                        "viewport": "width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0",
+                        "twitter:description": "Spartan is an extreme wellness platform helping humans become UNBREAKABLE. Find a race near you and commit to an event. Shop performance &amp; commemorative gear. Learn how to become the most elite version of yourself with our Unbreakable Blog.",
+                        "shopify-digital-wallet": "/13210493/digital_wallets/dialog",
+                        "seomanager": "6.2",
+                        "og:url": "https://www.spartan.com/"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://cdn.shopify.com/s/files/1/1321/0493/files/Meta_Image_56f176eb-5c59-498a-b281-96d243d9a4f4.jpg?v=1677259204"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "Rugged Maniac Obstacle Course Races",
+            "htmlTitle": "Rugged Maniac <b>Obstacle Course Races</b>",
+            "link": "https://ruggedmaniac.com/",
+            "displayLink": "ruggedmaniac.com",
+            "snippet": "Simply put, Rugged Maniac is the greatest obstacle course race ever concocted. With the most obstacles per mile of any race on the planet,\u00a0...",
+            "htmlSnippet": "Simply put, Rugged Maniac is the greatest <b>obstacle course race</b> ever concocted. With the most obstacles per mile of any race on the planet,&nbsp;...",
+            "cacheId": "6QjJaHQUXfIJ",
+            "formattedUrl": "https://ruggedmaniac.com/",
+            "htmlFormattedUrl": "https://ruggedmaniac.com/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYsXzCGOzxQb-pFODf1bBlyYCHN3rTA8Q7GadgXTq6XjAs0_zd87sKxXE",
+                        "width": "303",
+                        "height": "166"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://ruggedmaniac.com/wp-content/uploads/2021/11/Hero-image-01-1000px.png",
+                        "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+                        "msapplication-tileimage": "https://ruggedmaniac.com/wp-content/uploads/2022/11/cropped-MicrosoftTeams-image-43-270x270.png"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://ruggedmaniac.com/wp-content/uploads/2021/11/Hero-image-01-1000px.png"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "Obstacle Course Races This Spring: Spartan/Tough Mudder ...",
+            "htmlTitle": "<b>Obstacle Course Races</b> This Spring: Spartan/Tough Mudder ...",
+            "link": "https://www.spartan.com/blogs/unbreakable-race-stories/obstacle-course-races-this-spring",
+            "displayLink": "www.spartan.com",
+            "snippet": "Nov 29, 2022 ... Get ready for a Spartan Sprint 5K obstacle race that will change your life. This is our signature race distance. A fast-paced adventure through\u00a0...",
+            "htmlSnippet": "Nov 29, 2022 <b>...</b> Get ready for a Spartan Sprint 5K <b>obstacle race</b> that will change your life. This is our signature <b>race</b> distance. A fast-paced adventure through&nbsp;...",
+            "cacheId": "UiOhrUUJrLIJ",
+            "formattedUrl": "https://www.spartan.com/blogs/...race.../obstacle-course-races-this-spring",
+            "htmlFormattedUrl": "https://www.spartan.com/blogs/...race.../<b>obstacle</b>-<b>course</b>-races-this-spring",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSUkHZiXR47pzdKTIkmqnoLXbuuOuaB4iw2tn-g-LeoJCEwQ_RadMhagVOl",
+                        "width": "300",
+                        "height": "168"
+                    }
+                ],
+                "organization": [
+                    {
+                        "url": "Spartan Race | Home"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://www.spartan.com/cdn/shop/articles/220506MT-Saturday-MBahrenfuss-117_1024x1024.jpg?v=1669750807",
+                        "theme-color": "#000000",
+                        "og:type": "article",
+                        "twitter:card": "summary_large_image",
+                        "twitter:title": "22 Epic Obstacle Course Races You NEED to Try This Spring",
+                        "supported-color-schemes": "light",
+                        "og:site_name": "Spartan Race",
+                        "og:title": "22 Epic Obstacle Course Races You NEED to Try This Spring",
+                        "shopify-checkout-api-token": "ed9167d08d7523055fce0a3b16670119",
+                        "google": "notranslate",
+                        "color-scheme": "light",
+                        "og:description": "Ready to challenge yourself this year and get out of your comfort zone? Here is our official 2023 schedule of obstacle course races this spring race season.",
+                        "og:image:secure_url": "https://www.spartan.com/cdn/shop/articles/220506MT-Saturday-MBahrenfuss-117_1024x1024.jpg?v=1669750807",
+                        "facebook-domain-verification": "m6v0apekod6yg8riyrx3r19epu50wf",
+                        "twitter:site": "@spartanrace",
+                        "viewport": "width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0",
+                        "twitter:description": "Ready to challenge yourself this year and get out of your comfort zone? Here is our official 2023 schedule of obstacle course races this spring race season.",
+                        "shopify-digital-wallet": "/13210493/digital_wallets/dialog",
+                        "seomanager": "6.2",
+                        "og:url": "https://www.spartan.com/blogs/unbreakable-race-stories/obstacle-course-races-this-spring"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://www.spartan.com/cdn/shop/articles/220506MT-Saturday-MBahrenfuss-117_1024x1024.jpg?v=1669750807"
+                    }
+                ],
+                "article": [
+                    {
+                        "articlebody": "22 Epic Obstacle Course Races You NEED to Try This Spring By The Spartan Editors \u00b7 November 29, 2022 Share Facebook Share on Facebook Tweet Tweet on Twitter Pin it Pin on Pinterest Whatsapp..."
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "Obstacle Course Races - The Best Events for Runners to Try",
+            "htmlTitle": "<b>Obstacle Course Races</b> - The Best Events for Runners to Try",
+            "link": "https://www.runnersworld.com/training/g22144071/best-obstacle-course-races/",
+            "displayLink": "www.runnersworld.com",
+            "snippet": "Oct 21, 2021 ... Obstacle Course Races Every Runner Should Try \u00b7 Spartan Race \u00b7 Tough Mudder \u00b7 BoneFrog Challenge \u00b7 Savage Race \u00b7 Epic Series Obstacle Challenge.",
+            "htmlSnippet": "Oct 21, 2021 <b>...</b> <b>Obstacle Course Races</b> Every Runner Should Try &middot; Spartan Race &middot; Tough Mudder &middot; BoneFrog Challenge &middot; Savage Race &middot; Epic Series Obstacle Challenge.",
+            "cacheId": "EiYE335ZgMEJ",
+            "formattedUrl": "https://www.runnersworld.com/training/.../best-obstacle-course-races/",
+            "htmlFormattedUrl": "https://www.runnersworld.com/training/.../best-<b>obstacle</b>-<b>course</b>-races/",
+            "pagemap": {
+                "speakablespecification": [
+                    {
+                        "cssselector": ".content-hed"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-158386364-1634824513.jpg?crop=1.00xw:0.553xh;0,0.0742xh&resize=1200:*",
+                        "theme-color": "#000000",
+                        "og:image:width": "1200",
+                        "twitter:card": "summary_large_image",
+                        "article:published_time": "2021-10-21T14:28:00Z",
+                        "og:site_name": "Runner's World",
+                        "sailthru.tags": "training,Training",
+                        "sailthru.excerpt": "<p>Bored with your same old <a href=\"https://www.runnersworld.com/training/a19492479/marathon-training-plans/\" target=\"_blank\">marathon training</a>? Well, there's good news. There\u2019s a way to breathe some new life into your running regimen\u2014signing up for an obstacle course race.</p><p>These races take regular running courses and pepper them with obstacle stations\u2014everything from monkey bars to penalty burpees\u2014that challenge every muscle in your body. Think of obstacle races as a happy blend of cardio and strength training that provide you with an unforgettable race-day experience.</p><p><mark>\u2192<em><a href=\"https://www.runnersworld.com/training/a23007718/how-to-prep-for-your-first-obstacle-course-race/\" target=\"_blank\"><strong><u>Learn how to prep for your first OCR here!</u></strong></a></em></mark></p><p>Many obstacle course races faced the impact of <a href=\"https://www.runnersworld.com/coronavirus\" target=\"_blank\">COVID-19</a> with cancellations or postponements, but have since returned to form, ",
+                        "sailthru.contenttype": "listicle",
+                        "title": "Obstacle Course Races - The Best Events for Runners to Try",
+                        "og:description": "Get ready to challenge your body in a whole new way.",
+                        "article:publisher": "https://www.facebook.com/RunnersWorld/",
+                        "twitter:image": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-158386364-1634824513.jpg?crop=1.00xw:0.553xh;0,0.0742xh&resize=640:*",
+                        "next-head-count": "47",
+                        "msapplication-tap-highlight": "no",
+                        "twitter:site": "@runnersworld",
+                        "article:modified_time": "2023-02-06T17:13:06Z",
+                        "sailthru.socialtitle": "Anyone Who Considers Themselves a Runner Needs to Try These 6 Obstacle Course Races",
+                        "sailthru.date": "2021-10-21 14:28:00",
+                        "og:type": "website",
+                        "thumbnail": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-158386364-1634824513.jpg?crop=0.909xw:1.00xh;0.0465xw,0&resize=320:*",
+                        "article:section": "Training",
+                        "x-ua-compatible": "IE=edge,chrom=1",
+                        "m1": ".content-hed",
+                        "m2": ".content-dek p",
+                        "og:title": "Anyone Who Considers Themselves a Runner Needs to Try These 6 Obstacle Course Races",
+                        "auto-publish": "never",
+                        "og:image:height": "600",
+                        "sailthru.image.thumb": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-158386364-1634824513.jpg?crop=0.909xw:1.00xh;0.0465xw,0",
+                        "fb:app_id": "424005050993003",
+                        "viewport": "width=device-width, initial-scale=1.0",
+                        "og:url": "https://www.runnersworld.com/training/g22144071/best-obstacle-course-races/",
+                        "sailthru.image.full": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-158386364-1634824513.jpg?crop=0.909xw:1.00xh;0.0465xw,0&resize=320:*",
+                        "article:opinion": "false"
+                    }
+                ],
+                "listitem": [
+                    {
+                        "item": "Training",
+                        "name": "Training",
+                        "position": "1"
+                    },
+                    {
+                        "item": "Obstacle Course Races Every Runner Should Try",
+                        "name": "Obstacle Course Races Every Runner Should Try",
+                        "position": "2"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "USAOCR, the National Governing Body for Obstacle Course Racing",
+            "htmlTitle": "USAOCR, the National Governing Body for <b>Obstacle Course Racing</b>",
+            "link": "https://usaocr.org/",
+            "displayLink": "usaocr.org",
+            "snippet": "USA Obstacle Course Racing (USAOCR) is the National Governing Body for Obstacle Course Racing (OCR) and events in the United States of America.",
+            "htmlSnippet": "USA <b>Obstacle Course Racing</b> (USAOCR) is the National Governing Body for <b>Obstacle Course Racing</b> (OCR) and events in the United States of America.",
+            "cacheId": "2JBQXMDob-AJ",
+            "formattedUrl": "https://usaocr.org/",
+            "htmlFormattedUrl": "https://usaocr.org/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOGGeE3ZjiRHFnUVuHrcRfXfkWmgRX6D2ul3PwJdOfX1I0haetWrxU5Uo",
+                        "width": "248",
+                        "height": "204"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://img1.wsimg.com/isteam/ip/9ce670b9-0b57-4abd-8b63-79c2c0b7ef54/USAOCR.png",
+                        "og:type": "website",
+                        "twitter:card": "summary",
+                        "twitter:title": "USAOCR",
+                        "theme-color": "#2175FF",
+                        "og:site_name": "USAOCR",
+                        "author": "USAOCR",
+                        "og:title": "USAOCR",
+                        "og:description": "The National Governing Body for Obstacle Course Racing\n in the United States of America",
+                        "twitter:image": "https://img1.wsimg.com/isteam/ip/9ce670b9-0b57-4abd-8b63-79c2c0b7ef54/USAOCR.png",
+                        "twitter:image:alt": "USAOCR",
+                        "viewport": "width=device-width, initial-scale=1",
+                        "twitter:description": "USA Obstacle Course Racing",
+                        "og:locale": "en_US",
+                        "og:url": "https://usaocr.org/"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://img1.wsimg.com/isteam/ip/9ce670b9-0b57-4abd-8b63-79c2c0b7ef54/USAOCR.png"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "\u200b7 Obstacle Course Races That Will Seriously Test Your Fitness ...",
+            "htmlTitle": "\u200b7 <b>Obstacle Course Races</b> That Will Seriously Test Your Fitness ...",
+            "link": "https://www.menshealth.com/fitness/g19524677/7-obstacle-course-races-to-try/",
+            "displayLink": "www.menshealth.com",
+            "snippet": "Jul 10, 2017 ... 7 Obstacle Course Races That Will Seriously Test Your Fitness ; Spartan Race. spartan race ; Zombie Mud Run. zombie mud run ; Warrior Dash. warrior\u00a0...",
+            "htmlSnippet": "Jul 10, 2017 <b>...</b> 7 <b>Obstacle Course Races</b> That Will Seriously Test Your Fitness ; Spartan Race. spartan race ; Zombie Mud Run. zombie mud run ; Warrior Dash. warrior&nbsp;...",
+            "cacheId": "K5B73v_SI2gJ",
+            "formattedUrl": "https://www.menshealth.com/fitness/.../7-obstacle-course-races-to-try/",
+            "htmlFormattedUrl": "https://www.menshealth.com/fitness/.../7-<b>obstacle</b>-<b>course</b>-races-to-try/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs2QhRr67aEa-oVOWz2lVntxI_9FW_C_TePZUTAZuQi14YCm4LpmCs1Q4",
+                        "width": "282",
+                        "height": "179"
+                    }
+                ],
+                "thumbnail": [
+                    {
+                        "src": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-warrior-dash-1506732588.jpg?crop=0.636xw:1xh;center,top&resize=320:*"
+                    }
+                ],
+                "speakablespecification": [
+                    {
+                        "cssselector": ".content-hed"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "og:image": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-warrior-dash-1506732588.jpg?crop=1xw:0.786xh;center,top&resize=1200:*",
+                        "theme-color": "#000000",
+                        "og:image:width": "1200",
+                        "twitter:card": "summary_large_image",
+                        "article:published_time": "2017-07-10T18:30:52Z",
+                        "og:site_name": "Men's Health",
+                        "sailthru.tags": "fitness,Fitness",
+                        "sailthru.excerpt": "<p>Here's my belief: the notion of straight-up running kind of sucks to most of us. Why spend money on running around on hot pavement when you could just... not? (To be fair, <a href=\"http://www.menshealth.com/health/an-hour-of-running-may-add-7-hours-to-your-life\" target=\"_blank\">this study says an hour of running could actually extend your life</a>) But if you want to get out and enjoy the outdoors while getting a serious workout in, it may be high time you look into signing up for an obstacle course race.</p>\n<p>The appeal of obstacle course racing, to most, is that you hardly notice you're running, because you're more focused on dealing with intense, oftentimes <a href=\"http://www.menshealth.com/content/how-army-rangers-train-to-become-the-fittest-warriors-in-the-world\" target=\"_blank\">military-inspired</a> obstacles that will seriously challenge your mind and body.</p>\n<p>Signing up for a race can be a great motivator to get to the gym for training so you don't completely die out on the course. Signing u",
+                        "sailthru.contenttype": "gallery",
+                        "title": "\u200b7 Obstacle Course Races That Will Seriously Test Your Fitness | Men\u2019s Health",
+                        "og:description": "\u200bThese races will make you forget you're running and actually kick your butt",
+                        "article:publisher": "https://www.facebook.com/MensHealth",
+                        "twitter:image": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-warrior-dash-1506732588.jpg?crop=1xw:0.786xh;center,top&resize=640:*",
+                        "next-head-count": "47",
+                        "msapplication-tap-highlight": "no",
+                        "twitter:site": "@MensHealthMag",
+                        "article:modified_time": "2022-06-03T18:08:17Z",
+                        "sailthru.socialtitle": "7 Obstacle Course Races That Will Seriously Test Your Fitness",
+                        "sailthru.date": "2017-07-10 18:30:52",
+                        "og:type": "website",
+                        "thumbnail": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-warrior-dash-1506732588.jpg?crop=0.636xw:1xh;center,top&resize=320:*",
+                        "article:section": "Fitness",
+                        "x-ua-compatible": "IE=edge,chrom=1",
+                        "m1": ".content-hed",
+                        "m2": ".content-dek p",
+                        "og:title": "7 Obstacle Course Races That Will Seriously Test Your Fitness",
+                        "og:image:height": "600",
+                        "sailthru.image.thumb": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-warrior-dash-1506732588.jpg?crop=0.636xw:1xh;center,top",
+                        "fb:app_id": "128455567236258",
+                        "viewport": "width=device-width, initial-scale=1.0",
+                        "og:url": "https://www.menshealth.com/fitness/g19524677/7-obstacle-course-races-to-try/",
+                        "sailthru.image.full": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-warrior-dash-1506732588.jpg?crop=0.636xw:1xh;center,top&resize=320:*",
+                        "article:opinion": "false"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://hips.hearstapps.com/hmg-prod/images/701/obstacle-course-races-test-fitness-tough-mudder-1506732585.jpg?resize=480:*"
+                    }
+                ],
+                "listitem": [
+                    {
+                        "item": "Fitness",
+                        "name": "Fitness",
+                        "position": "1"
+                    },
+                    {
+                        "item": "7 Obstacle Course Races That Will Seriously Test Your Fitness",
+                        "name": "7 Obstacle Course Races That Will Seriously Test Your Fitness",
+                        "position": "2"
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "customsearch#result",
+            "title": "Obstacle Racing Media: Homepage",
+            "htmlTitle": "<b>Obstacle Racing</b> Media: Homepage",
+            "link": "https://www.obstacleracingmedia.com/",
+            "displayLink": "www.obstacleracingmedia.com",
+            "snippet": "Spartan Tea The minds behind Spartan Race set out to make a tea for Spartans and came up with using the herb Sidiritis. Why did they\u2026 October 26, 2020\u00a0...",
+            "htmlSnippet": "Spartan Tea The minds behind Spartan <b>Race</b> set out to make a tea for Spartans and came up with using the herb Sidiritis. Why did they\u2026 October 26, 2020&nbsp;...",
+            "cacheId": "RzzvLotsrWMJ",
+            "formattedUrl": "https://www.obstacleracingmedia.com/",
+            "htmlFormattedUrl": "https://www.<b>obstacleracing</b>media.com/",
+            "pagemap": {
+                "cse_thumbnail": [
+                    {
+                        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqo9J2wZVN7FIfPa-esF2I7nXGIPXpL0KQ6V2Mp5A-ck16x23w3z8H53ER",
+                        "width": "300",
+                        "height": "168"
+                    }
+                ],
+                "metatags": [
+                    {
+                        "application-name": "Obstacle Racing Media",
+                        "msapplication-tilecolor": "#FFFFFF",
+                        "og:type": "website",
+                        "twitter:card": "summary",
+                        "twitter:title": "Homepage - Obstacle Racing Media",
+                        "msapplication-square70x70logo": "https://obstacleracingmedia.com/mstile-70x70.png",
+                        "og:site_name": "Obstacle Racing Media",
+                        "tec-api-origin": "https://www.obstacleracingmedia.com",
+                        "og:title": "Homepage - Obstacle Racing Media",
+                        "msapplication-wide310x150logo": "https://obstacleracingmedia.com/mstile-310x150.png",
+                        "msapplication-tileimage": "https://obstacleracingmedia.com/mstile-144x144.png",
+                        "twitter:creator": "@ObstacleMedia",
+                        "msapplication-square150x150logo": "https://obstacleracingmedia.com/mstile-150x150.png",
+                        "twitter:site": "@ObstacleMedia",
+                        "viewport": "width=device-width, initial-scale=1",
+                        "msapplication-square310x310logo": "https://obstacleracingmedia.com/mstile-310x310.png",
+                        "og:locale": "en_US",
+                        "og:url": "https://www.obstacleracingmedia.com/",
+                        "tec-api-version": "v1"
+                    }
+                ],
+                "cse_image": [
+                    {
+                        "src": "https://i.ytimg.com/vi/nMAHk__TVbk/mqdefault.jpg"
+                    }
+                ]
+            }
+        }
+    ]
+}
