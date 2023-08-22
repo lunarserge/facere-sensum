@@ -7,6 +7,8 @@ Welcome to facere-sensum's documentation!
    :caption: Contents:
 
    intro
+   features
+   sources
    installation
    examples
 
