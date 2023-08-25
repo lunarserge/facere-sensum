@@ -39,9 +39,9 @@ A layer is defined by a JSON file with the following informally described scheme
 
 See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples>`_ for examples of ``facere-sensum`` layer configuration.
 
-********************************************************
+******************************************************
 Authentication for Sourcing Metrics from Third Parties
-********************************************************
+******************************************************
 
 Sometimes an authentication is necessary for a data source. E.g., search engine optimization tracking with Google requires an API key and search engine ID to be used for accessing necessary Google services. These keys are application-wide and not specific to a particular ``facere-sensum`` layer, hence provided by a separate JSON file. :doc:`Data sources <sources>` section explains authentication format, if required by a particular source type.
 
