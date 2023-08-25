@@ -8,6 +8,8 @@ By doing that, ``facere-sensum`` provides a formal way for product management to
 
 See below for the overall methodology description and :doc:`examples <examples>` section for a sample of its practical application.
 
+.. _the-approach:
+
 ************
 The Approach
 ************
@@ -55,6 +57,7 @@ Use by Development Teams
 ************************
 
 Development teams would use ``facere-sensum`` to:
+
 * Understand if the goal is achievable.
 * Define focus areas and track execution.
 

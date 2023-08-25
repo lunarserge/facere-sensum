@@ -10,6 +10,8 @@ Let us use the same SEO example used in the :doc:`introduction <intro>` section 
 
 Here is how the work could evolve between product management and development teams. Since the problem at hand is SEO, the development team is probably from marketing department.
 
+.. _metrics-hierarchy:
+
 Step 1. Define Hierarchy of Metrics
 ===================================
 
@@ -109,4 +111,4 @@ This analysis shows that the goal is achievable.
 Step 6. Define Focus Areas and Track Execution
 ==============================================
 
-We can see now that the goal of ``0.5`` is achievable by focusing SEO on improving search for two out of five search terms. Overall, this gives marketing department a goal, a way to track it, and a focus so that they know exactly which pieces of the equation that should work with.
+We can see now that the goal of ``0.5`` is achievable by focusing SEO on improving search for two out of five search terms. Overall, this gives marketing department a goal, a way to track it, and a focus so that they know exactly which pieces of the equation they should work with.
