@@ -109,12 +109,13 @@ def command_update(config, log_file, marker):
     data.iloc[-1,2:-1:2] = scores
     data.iloc[-1,-1] = score_comb
 
-    priorities = _compute_new_priorities(priorities, scores)
-    print('\nYour new priorities are:')
-    pairs = list(zip(metrics, priorities))
-    pairs.sort(key=lambda pair: pair[1], reverse=True)
-    for (metric,priority) in pairs:
-        print(f'  - {metric}: {priority:.2f}')
+    if 'weights' in config and config['weights'] == 'dynamic':
+        priorities = _compute_new_priorities(priorities, scores)
+        print('\nYour new priorities are:')
+        pairs = list(zip(metrics, priorities))
+        pairs.sort(key=lambda pair: pair[1], reverse=True)
+        for (metric,priority) in pairs:
+            print(f'  - {metric}: {priority:.2f}')
 
     # Create a new row and store new priorities in it.
     new_row = [None] # date is empty

@@ -1,5 +1,6 @@
 {
     "log": "log.csv",
+    "weights": "dynamic",
     "metrics": [
         {
             "id": "Self-Development",
