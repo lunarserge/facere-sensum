@@ -18,7 +18,7 @@ A layer is defined by a JSON file with the following informally described scheme
 
     {
         "log": "CSV file for storing layer data",
-        "weights": "static" or "dynamic",
+        "weights": ["static", "dynamic"],
         "metrics": [
             {
                 "id": "string: metric id",
