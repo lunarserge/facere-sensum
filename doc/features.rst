@@ -18,6 +18,7 @@ A layer is defined by a JSON file with the following informally described scheme
 
     {
         "log": "CSV file for storing layer data",
+        "weights": ["static", "dynamic"],
         "metrics": [
             {
                 "id": "string: metric id",
@@ -29,8 +30,9 @@ A layer is defined by a JSON file with the following informally described scheme
         ]
     }
 
-* ``log`` is the name of CSV file for storing layer data. For the most part users do not need to work with the log file directly, but in the current version of ``facere-sensum`` the result (higher level metric values reflecting collective behavior of layer metrics) is obtained directly from there.
-* ``metrics`` is the array of individual metrics that collectively form a layer:
+* ``log`` (required): the name of CSV file for storing layer data. For the most part users do not need to work with the log file directly, but in the current version of ``facere-sensum`` the result (higher level metric values reflecting collective behavior of layer metrics) is obtained directly from there.
+* ``weights`` (optional, defaults to ``static``) specifies the approach for calculating metric weights. ``static`` always uses the weights specified in this JSON file as is. ``dynamic`` adjusts metric weights over time based on their scores, so that those metrics that don't perform well receive more weight. See :ref:`dynamic-vs-static-weights` for details.
+* ``metrics`` (required): the array of individual metrics that collectively form a layer:
 
   * ``id`` is a string with a short text description of the metric.
   * ``source`` is a string specifying the data source for the metric. For the list of pre-defined sources see :doc:`here <sources>`. For instructions on how to define your own data source see :ref:`here <bringing-your-own-metric>`.
@@ -38,6 +40,14 @@ A layer is defined by a JSON file with the following informally described scheme
   * ``<other source-specific fields>`` are additional source-dependent details for the metric. E.g., search engine optimization tracking metric would need to know which URL is the search target. These details are documented along with the corresponding :doc:`sources <sources>`.
 
 See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples>`_ for examples of ``facere-sensum`` layer configuration.
+
+.. _dynamic-vs-static-weights:
+
+*************************
+Dynamic vs Static Weights
+*************************
+
+TO BE ADDED
 
 ******************************************************
 Authentication for Sourcing Metrics from Third Parties
