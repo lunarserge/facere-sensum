@@ -1,3 +1,4 @@
   google-api-python-client>=2.93.0
   numpy>=1.24.3
   pandas>=2.0.1
+  prettytable>=3.9.0

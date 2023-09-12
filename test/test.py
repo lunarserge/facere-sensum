@@ -39,7 +39,7 @@ def _mock_up_direct_user_input(data):
     'data' is a list of values to be used instead of the actual user input.
     '''
     data = (item for item in data)
-    user_connector.get_value = lambda metric: next(data)
+    user_connector.get_raw = lambda metric: next(data)
 
 class Test(unittest.TestCase):
     '''
@@ -95,7 +95,7 @@ def _test_integration(descr, args, ref):
     'ref' expected output.
     '''
     print(descr, end=': ')
-    res = subprocess.run(['python', 'fsy.py'] + args,
+    res = subprocess.run([sys.executable, 'fsy.py'] + args,
                          check=False, capture_output=True, text=True).stdout # nosec B603
     if res == ref:
         print('OK')
