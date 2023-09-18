@@ -29,7 +29,7 @@ def _test(metric, expected_raw, expected_value):
         return False
 
     _mock_up_data()
-    return customsearch.get_value(metric) == expected_value
+    return customsearch.get_normalized(metric, expected_raw) == expected_value
 
 def test():
     '''

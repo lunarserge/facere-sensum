@@ -12,6 +12,7 @@ from argparse import ArgumentParser
 import datetime
 import numpy as np
 import pandas as pd
+import prettytable
 
 VERSION = '0.0.5'
 
@@ -62,19 +63,35 @@ def command_create(config, log_file):
 # Map of pairs: data connector name / connector module.
 _connectors = {}
 
-def score(metric):
+def _score(metric):
     '''
-    Get metric score.
+    Get raw and normalized metric scores.
     'metric' is the metric JSON description.
     '''
     source = metric['source']
 
     if source == 'const':
-        return metric['value']
+        res = metric['value']
+        return res, res
 
     if not source in _connectors:
         _connectors[source] = importlib.import_module('facere_sensum.connectors.'+source)
-    return _connectors[source].get_value(metric)
+
+    source = _connectors[source]
+    raw = source.get_raw(metric)
+    return raw, source.get_normalized(metric, raw)
+
+def _print_report(metrics, scores):
+    '''
+    Print report with the computed metric scores.
+    'metrics' is a list with layer metrics.
+    'scores' is a list of tuples with corresponding raw and normalized scores.
+    '''
+    table = prettytable.PrettyTable(['Metric', 'Raw', 'Normalized'])
+    for metric,score in zip(metrics,scores):
+        table.add_row([metric['id'], score[0], score[1]])
+    print()
+    print(table)
 
 def command_update(config, log_file, marker):
     '''
@@ -89,9 +106,7 @@ def command_update(config, log_file, marker):
     except FileNotFoundError:
         print('Log file \''+log_file+'\' not found. Exiting.')
         sys.exit(1)
-
-    # Infer metrics from priority column names.
-    metrics = [s[2:-1] for s in data.columns[1:-1:2]]
+    data = data.astype({'ID': 'string'})
 
     priorities = data.iloc[-1,1:-1:2] # pick priorities from the last row
     priorities_combined = sum(priorities)
@@ -99,30 +114,37 @@ def command_update(config, log_file, marker):
         print("Warning: last row priorities don't sum up to 1 " \
               f"(sum is ~{priorities_combined:.2f})\n")
 
-    print(f'\nEnter scoring for {marker} (each score must be within 0..1 range):')
-    scores = [score(metric) for metric in config['metrics']]
-    score_comb = np.dot(priorities, scores)
+    print(f'\nScoring for {marker}:')
+    metrics = config['metrics']
+    scores = []
+    for metric in metrics:
+        scores.append(_score(metric))
+
+    _print_report(metrics, scores)
+
+    norm_scores = [score[1] for score in scores]
+    score_comb = np.dot(priorities, norm_scores)
     print(f'\nYour combined score for {marker} is ~{score_comb:.2f}')
 
     # Populate date and scores in the last row in preparation for the log file update.
-    data.iloc[-1,0] = marker
-    data.iloc[-1,2:-1:2] = scores
+    data.iloc[-1,0] = str(marker)
+    data.iloc[-1,2:-1:2] = norm_scores
     data.iloc[-1,-1] = score_comb
 
     if 'weights' in config and config['weights'] == 'dynamic':
-        priorities = _compute_new_priorities(priorities, scores)
+        priorities = _compute_new_priorities(priorities, norm_scores)
         print('\nYour new priorities are:')
-        pairs = list(zip(metrics, priorities))
+        pairs = list(zip([metric['id'] for metric in metrics], priorities))
         pairs.sort(key=lambda pair: pair[1], reverse=True)
         for (metric,priority) in pairs:
             print(f'  - {metric}: {priority:.2f}')
 
     # Create a new row and store new priorities in it.
-    new_row = [None] # date is empty
+    new_row = [''] # date is empty
     for priority in priorities:
         new_row.append(priority)
-        new_row.append(None) # individual scores are empty
-    new_row.append(None) # combined score is empty
+        new_row.append(0) # individual scores are zero until measured
+    new_row.append(0) # combined score is zero until measured
     data.loc[len(data)] = new_row
 
     data.to_csv(log_file, index=False)

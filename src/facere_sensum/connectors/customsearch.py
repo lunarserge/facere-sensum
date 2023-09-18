@@ -47,16 +47,12 @@ def get_raw(metric):
         num -= 10
     return 0
 
-def get_value(metric):
+def get_normalized(metric, raw):
     '''
     Get standard (i.e., normalized) metric score for Google Custom Search API.
     'metric' is the metric JSON description.
+    'raw' is the raw metric score.
     '''
-    raw = get_raw(metric)
-    metric_id = metric['id']
-    metric_outcome = str(raw) if raw else 'not found'
-    print(f'  - {metric_id}: {metric_outcome}')
-
     if raw:
         num = metric['num'] if 'num' in metric else _NUM
         return (num+1-raw) / num
