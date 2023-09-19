@@ -171,14 +171,15 @@ def main():
                 # for all other modules to access as necessary.
                 globals()['auth'] = json.load(auth_file)
         except FileNotFoundError:
-            print('Authentication config file \''+args.auth+'\' not found. Exiting.')
+            print('Authentication config file \''+args.auth+'\' not found. Exiting.',
+                  file=sys.stderr)
             sys.exit(1)
 
     try:
         with open(args.config, encoding='utf-8') as config_file:
             config = json.load(config_file)
     except FileNotFoundError:
-        print('Project config file \''+args.config+'\' not found. Exiting.')
+        print('Project config file \''+args.config+'\' not found. Exiting.', file=sys.stderr)
         sys.exit(1)
 
     log = config['log']

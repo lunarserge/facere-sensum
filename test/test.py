@@ -87,32 +87,38 @@ class Test(unittest.TestCase):
             if file_name.startswith('t_') and file_name.endswith('.py'):
                 self.assertTrue(importlib.import_module('t_connectors.t_'+file_name[2:-3]).test())
 
-def _test_integration(descr, args, ref):
+def _test_integration(descr, args, ref_out, ref_err):
     '''
     Run an integration test.
     'descr' is test user description.
     'args' command line arguments to use.
-    'ref' expected output.
+    'ref_out' expected output in stdout or None if the test doesn't use it.
+    'ref_err' expected output in stderr.
     '''
     print(descr, end=': ')
     res = subprocess.run([sys.executable, 'fsy.py'] + args,
-                         check=False, capture_output=True, text=True).stdout # nosec B603
-    if res == ref:
-        print('OK')
-    else:
-        print('FAILED', 'Output:', '---', res, '---', 'Expected:', '---', ref, '---', sep='\n')
+                         check=False, capture_output=True, text=True) # nosec B603
+
+    if ref_out and res.stdout != ref_out:
+        print('FAILED on stdout',
+              'Output:', '---', res.stdout, '---', 'Expected:', '---', ref_out, '---', sep='\n')
         sys.exit(1)
+    if res.stderr != ref_err:
+        print('FAILED on stderr',
+              'Output:', '---', res.stderr, '---', 'Expected:', '---', ref_err, '---', sep='\n')
+        sys.exit(1)
+    print('OK')
 
 if __name__ == '__main__':
     print('Integration tests:')
     _test_integration('Authentication config not found',
                       ['--auth', 'notfound.json', 'update'],
-                      'Authentication config file \'notfound.json\' not found. Exiting.\n')
+                      None, 'Authentication config file \'notfound.json\' not found. Exiting.\n')
     _test_integration('Project config not found',
                       ['--config', 'notfound.json', 'update'],
-                      'Project config file \'notfound.json\' not found. Exiting.\n')
+                      None, 'Project config file \'notfound.json\' not found. Exiting.\n')
     _test_integration('Create command', ['--config', _CONFIG_PATH, 'create'],
-                      'log.csv is created\n')
+                      'log.csv is created\n', '')
 
     # Unit tests
     unittest.main()
