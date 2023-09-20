@@ -1,0 +1,11 @@
+{
+    "log": "log.csv",
+    "metrics": [
+        {
+            "id": "notfound",
+            "source": "uplevel",
+            "priority": 1,
+            "log": "notfound.csv"
+        }
+    ]
+}
