@@ -119,6 +119,13 @@ if __name__ == '__main__':
                       None, 'Project config file \'notfound.json\' not found. Exiting.\n')
     _test_integration('Create command', ['--config', _CONFIG_PATH, 'create'],
                       'log.csv is created\n', '')
+    _test_integration('Uplevel connector log file not found',
+                      ['--config',
+                       os.path.join('test', 'input', 'config_uplevel_notfound.json'),
+                       'update'],
+                      None,
+                      'Error (upleveling collective metric behavior connector): '
+                      'layer data CSV file \'notfound.csv\' not found. Exiting.\n')
 
     # Unit tests
     unittest.main()

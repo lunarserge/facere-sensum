@@ -43,10 +43,17 @@ See `here <https://developers.google.com/custom-search/v1/overview>`_ for inform
 
 See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_customsearch.json>`_ for an example of using the ``customsearch`` data source.
 
-``facere-sensum``
-=================
+``uplevel``
+===========
 
-TO BE ADDED
+Uplevels collective metric behavior to a higher-level via computing the weighted sum of the corresponding lower-level metric values. This data source supports key ``facere-sensum`` idea of combining metrics into tree-like structures. See :ref:`here <the-approach>` for details.
+
+JSON config fields for metrics using source ``uplevel``:
+
+* ``"source": "uplevel"``
+* ``"log"`` (required): CSV file storing the data for ``facere-sensum`` layer that is being upleveled.
+
+See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
 
 ``user``
 ========
