@@ -2,3 +2,4 @@
   numpy>=1.24.3
   pandas>=2.0.1
   prettytable>=3.9.0
+  PyGithub>=1.59.1

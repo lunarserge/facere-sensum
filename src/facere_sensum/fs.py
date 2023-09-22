@@ -151,6 +151,21 @@ def command_update(config, log_file, marker):
     print(log_file, 'is updated')
     return score_comb
 
+def get_3rd_party_entry(party, entry):
+    '''
+    Get 3rd parthy entry from the authentication config.
+    'party' is the 3rd party name.
+    'entry' is the entry name.
+    Return the requested entry if it is specified via the authentication config, None otherwise.
+    '''
+    if not 'auth' in globals():
+        return None # No authentication config at all.
+    config = globals()['auth']
+    if not party in config:
+        return None # No authentication info for the specified 3rd party.
+    party = config[party]
+    return party[entry] if entry in party else None
+
 def main():
     '''
     CLI entry.

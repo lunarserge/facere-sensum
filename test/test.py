@@ -83,9 +83,17 @@ class Test(unittest.TestCase):
         with open('auth.json', encoding='utf-8') as auth_file:
             fs.auth = json.load(auth_file)
 
-        for file_name in os.listdir(os.path.join('test', 't_connectors')):
-            if file_name.startswith('t_') and file_name.endswith('.py'):
-                self.assertTrue(importlib.import_module('t_connectors.t_'+file_name[2:-3]).test())
+        # pylint: disable-next=unused-variable
+        for dir_path, dir_names, file_names in os.walk(os.path.join('test', 't_connectors')):
+            if dir_path.endswith('__pycache__'):
+                continue
+
+            # Remove leading 'test' folder and convert to package syntax.
+            dir_path = dir_path[5:].replace(os.sep,'.')
+
+            for file_name in file_names:
+                if file_name.startswith('t_') and file_name.endswith('.py'):
+                    self.assertTrue(importlib.import_module(dir_path+'.'+file_name[:-3]).test())
 
 def _test_integration(descr, args, ref_out, ref_err):
     '''
