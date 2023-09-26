@@ -39,9 +39,9 @@ Since this source accesses Google services, authentication details need to be pr
         "search engine ID": "search engine ID goes here"
     }
 
-See `here <https://developers.google.com/custom-search/v1/overview>`_ for information about Google API key and search engine ID.
+See `Custom Search JSON API <https://developers.google.com/custom-search/v1/overview>`_ for information about Google API key and search engine ID.
 
-See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_customsearch.json>`_ for an example of using the ``customsearch`` data source.
+See `customsearch JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_customsearch.json>`_ for an example of using the ``customsearch`` data source.
 
 ``uplevel``
 ===========
@@ -53,7 +53,7 @@ JSON config fields for metrics using source ``uplevel``:
 * ``"source": "uplevel"``
 * ``"log"`` (required): CSV file storing the data for ``facere-sensum`` layer that is being upleveled.
 
-See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
+See `uplevel JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
 
 ``GitHub``
 ==========
@@ -66,7 +66,7 @@ GitHub does not require authenticated access, but rate limits are higher if a pe
         "personal access token": "token goes here"
     }
 
-See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_github.json>`_ for an example of using GitHub data sources.
+See `GitHub JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_github.json>`_ for an example of using GitHub data sources.
 
 ``GitHub.star``
 ---------------

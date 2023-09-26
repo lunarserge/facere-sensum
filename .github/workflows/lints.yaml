@@ -33,3 +33,7 @@ jobs:
           bandit -r src/facere_sensum
           bandit -r test
           bandit fsy.py
+      - name: Dry-run Sphinx documentation generator
+        run: |
+          pip install sphinx
+          sphinx-build -b html -n -W doc tmp
