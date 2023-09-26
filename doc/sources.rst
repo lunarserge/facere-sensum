@@ -55,6 +55,52 @@ JSON config fields for metrics using source ``uplevel``:
 
 See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
 
+``GitHub``
+==========
+
+Captures metrics for GitHub projects. See subsections for specific metrics.
+
+GitHub does not require authenticated access, but rate limits are higher if a personal access token is provided. The personal access token can be provided using ``--auth`` command line option. Authentication JSON file needs to have the following entry::
+
+    "GitHub": {
+        "personal access token": "token goes here"
+    }
+
+See `here <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_github.json>`_ for an example of using GitHub data sources.
+
+``GitHub.star``
+---------------
+
+Captures number of GitHub stars against the target.
+
+JSON config fields for metrics using source ``GitHub.star``:
+
+* ``"source": "GitHub.star"``
+* ``"repo"`` (required): GitHub repository.
+* ``"target"`` (optional, defaults to ``1000``): target success number of GitHub stars for the metric value to hit ``0.5``.
+
+``GitHub.fork``
+---------------
+
+Captures number of GitHub forks against the target.
+
+JSON config fields for metrics using source ``GitHub.fork``:
+
+* ``"source": "GitHub.fork"``
+* ``"repo"`` (required): GitHub repository.
+* ``"target"`` (optional, defaults to ``100``): target success number of GitHub forks for the metric value to hit ``0.5``.
+
+``GitHub.watch``
+----------------
+
+Captures number of GitHub watchers against the target.
+
+JSON config fields for metrics using source ``GitHub.watch``:
+
+* ``"source": "GitHub.watch"``
+* ``"repo"`` (required): GitHub repository.
+* ``"target"`` (optional, defaults to ``50``): target success number of GitHub watchers for the metric value to hit ``0.5``.
+
 ``user``
 ========
 

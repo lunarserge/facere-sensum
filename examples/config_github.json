@@ -1,0 +1,25 @@
+{
+    "log": "log.csv",
+    "metrics": [
+        {
+            "id": "stars",
+            "priority": 0.333,
+            "source": "GitHub.star",
+            "repo": "lunarserge/facere-sensum"
+        },
+        {
+            "id": "forks",
+            "priority": 0.333,
+            "source": "GitHub.fork",
+            "repo": "lunarserge/facere-sensum",
+            "target": 10
+        },
+        {
+            "id": "watchers",
+            "priority": 0.333,
+            "source": "GitHub.watch",
+            "repo": "lunarserge/facere-sensum",
+            "target": 5
+        }
+    ]
+}
