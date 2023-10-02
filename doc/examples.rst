@@ -22,7 +22,7 @@ The organization has two product lines, so let us assume it has two separate lan
 
 Together this produces the following hierarchy of metrics:
 
-.. image:: SEO-hierarchy.png
+.. image:: _static/SEO-hierarchy.png
 
 Step 2. Define Normalized Lowest-Level Metrics
 ==============================================
