@@ -2,7 +2,7 @@
 Introduction
 ############
 
-``facere-sensum`` is a general-purpose metrics framework that helps put a meaningful number on anything. It allows to combine individual metrics into a higher-level metric that represents collective behavior as a single indicator.
+``facere-sensum`` is a general-purpose metrics framework that helps measure anything in a form of a meaningful number. It allows to combine individual metrics into a higher-level metric that represents collective behavior as a single indicator.
 
 By doing that, ``facere-sensum`` provides a formal way for product management to define priorities and goals for development work. On the receiving end, ``facere-sensum`` enables development teams to determine where exactly their effort needs to focus to hit the goal.
 
@@ -22,10 +22,10 @@ Here we have several levels of metrics:
 * Next level combines search terms for a particular project and yields a single-number metric for how well project landing page is found across *all* the search terms.
 * Finally, the top level - top of the tree - is just one single number reflecting how well the company does SEO across *all* its projects.
 
-This example is using homogeneous metrics, but in practice metrics can get heterogeneous. E.g., you can imagine even higher level which combines SEO efficiency with something different like uptime metric for landing pages. To abstract away such differences, ``facere-sensum`` is using normalized metric values at all levels. The values must be a number between ``0`` and ``1``, with ``0`` indicating inferior performance, ``1`` indicating perfect performance and other values indicating varying level of performance in between. This is how it works at various levels:
+This example is using homogeneous metrics, but in practice metrics can get heterogeneous. E.g., you can imagine even higher level which combines SEO efficiency with something different like uptime metric for landing pages. To abstract away such differences, ``facere-sensum`` is using normalized metric values at all levels. The values must be a floating-point number between ``0`` and ``1``, with ``0`` indicating inferior performance, ``1`` indicating perfect performance and other values indicating varying level of performance in between. This is how it works at various levels:
 
 * Lowest level metrics should be defined to support this directly. E.g., in the SEO example, lowest level metric (for project / search term pair) can be defined as ``1`` if the landing page shows up first in search results, 0.9 if it shows up second and so forth. The metric becomes ``0`` if the landing page is not found in the top ten search results.
-* Higher level metrics are calculated automatically by ``facere-sensum`` as a weighted sum of the corresponding lower-level metric values, with weights totaling to ``1``. This happens on all levels above the lowest. Since lower-level metric values are between ``0`` and ``1`` and weights are totaling to ``1`` this yields higher level metric values between ``0`` and ``1`` as well:
+* Higher level metrics are calculated automatically by ``facere-sensum`` as a weighted average of the corresponding lower-level metric values, with weights totaling to ``1``. This happens on all levels above the lowest. Since lower-level metric values are between ``0`` and ``1`` and weights are totaling to ``1`` this yields higher level metric values between ``0`` and ``1`` as well:
 
 .. math::
 

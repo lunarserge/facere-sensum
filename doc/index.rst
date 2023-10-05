@@ -11,11 +11,3 @@ Welcome to facere-sensum's documentation!
    sources
    installation
    examples
-
-******************
-Indices and tables
-******************
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
