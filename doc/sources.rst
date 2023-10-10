@@ -118,6 +118,20 @@ Source ``user`` does not use any additional fields.
 Bringing Your Own Metric
 ************************
 
-``facere-sensum`` provides a simple API for bringing your own metric data sources.
+``facere-sensum`` provides a simple API for bringing your own metric data sources. Data sources are defined by Python modules under ``src/facere_sensum/connectors`` folder.
 
-TO BE ADDED
+Let's assume you want to define your own data source named ``byom``. Here is what needs to happen:
+
+* Create ``byom.py`` module under ``src/facere_sensum/connectors`` folder.
+* Refer to your metric from JSON configs using ``byom`` source along with ``id``, ``priority`` and any other additional fields of your choice that your metric might need.
+
+``byom.py`` should define 2 functions:
+
+* ``get_raw(metric)``. This function should produce a raw value for your metric. For example, search engine optimization (SEO) tracking metric might return search term ranking in Google search. ``facere-sensum`` will call this function with ``metric`` argument containing a portion of JSON config corresponding to your metric. The ``metric`` argument will have required fields (``id``, ``source`` and ``priority``) and you can add any additional more specific fields that are required for your metric. E.g., SEO metric will need a target URL at least. Raw metric values are used for providing measurements to a user in a friendly format.
+* ``get_normalized(metric, raw)``. This function should produce a normalized value for your metric in a form of a floating-point value between ``0`` and ``1``. See :ref:`here <the-approach>` for recommendations on how to best normalize metrics. ``metric`` function argument has the same meaning as with ``get_raw(metric)``. ``raw`` argument will be a raw metric value produced by the earlier matching call to ``get_raw(metric)``. Normalized metric values are used for calculating collective metric behavior and thus fundamental for ``facere-sensum`` methodology.
+
+Related metrics can be combined into subfolders. E.g., GitHub metrics are combined in ``GitHub`` subfolder under ``src/facere_sensum/connectors``. Something like GitHub stars metric definition would sit in ``GitHub/star.py`` and would be referred to as ``GitHub.star`` source in JSON configs. Notice the use of dot in JSON configs - it is a part of Python module import syntax.
+
+That's it! ``facere-sensum`` doesn't require any additional registration for your metric - it will just look for a module with a matching name under ``src/facere_sensum/connectors``.
+
+All metrics coming with ``facere-sensum`` are implemented using the same protocol, so plenty of examples are available for `metric definitions <https://github.com/lunarserge/facere-sensum/tree/main/src/facere_sensum/connectors>`_ and corresponding `JSON configs <https://github.com/lunarserge/facere-sensum/tree/main/examples>`_.
