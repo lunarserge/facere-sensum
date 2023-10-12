@@ -11,6 +11,7 @@ Welcome to facere-sensum's documentation!
    sources
    installation
    examples
+   glossary
 
 ******************
 Indices and tables
