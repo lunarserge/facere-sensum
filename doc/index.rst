@@ -11,3 +11,4 @@ Welcome to facere-sensum's documentation!
    sources
    installation
    examples
+   glossary
