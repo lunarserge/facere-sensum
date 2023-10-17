@@ -12,11 +12,3 @@ Welcome to facere-sensum's documentation!
    installation
    examples
    glossary
-
-******************
-Indices and tables
-******************
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
