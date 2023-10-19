@@ -1,2 +1,2 @@
-ID,P(Self-Development),S(Self-Development),P(Family Time),S(Family Time),P(Job Deliverables),S(Job Deliverables),Score
-,0.4,,0.3,,0.3,,
+ID,W(Self-Development),RS(Self-Development),NS(Self-Development),W(Family Time),RS(Family Time),NS(Family Time),W(Job Deliverables),RS(Job Deliverables),NS(Job Deliverables),Score
+,0.4,,,0.3,,,0.3,,,
