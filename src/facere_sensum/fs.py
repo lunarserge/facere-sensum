@@ -45,8 +45,9 @@ def command_create(config, log_file):
         row = ['ID']
         for metric in config['metrics']:
             qualifier = '(' + metric['id'] + ')'
-            row.append('P' + qualifier)
-            row.append('S' + qualifier)
+            row.append('W' + qualifier)
+            row.append('RS' + qualifier)
+            row.append('NS' + qualifier)
         row.append('Score')
         writer.writerow(row)
 
@@ -54,6 +55,7 @@ def command_create(config, log_file):
         row = ['']
         for metric in config['metrics']:
             row.append(metric['priority'])
+            row.append('')
             row.append('')
         row.append('')
         writer.writerow(row)
@@ -108,7 +110,7 @@ def command_update(config, log_file, marker):
         sys.exit(1)
     data = data.astype({'ID': 'string'})
 
-    priorities = data.iloc[-1,1:-1:2] # pick priorities from the last row
+    priorities = data.iloc[-1,1:-1:3] # pick priorities from the last row
     priorities_combined = sum(priorities)
     if abs(priorities_combined-1) > 0.001:
         print("Warning: last row priorities don't sum up to 1 " \
@@ -128,7 +130,8 @@ def command_update(config, log_file, marker):
 
     # Populate date and scores in the last row in preparation for the log file update.
     data.iloc[-1,0] = str(marker)
-    data.iloc[-1,2:-1:2] = norm_scores
+    data.iloc[-1,2:-1:3] = [score[0] for score in scores]
+    data.iloc[-1,3:-1:3] = norm_scores
     data.iloc[-1,-1] = score_comb
 
     if 'weights' in config and config['weights'] == 'dynamic':
@@ -143,7 +146,9 @@ def command_update(config, log_file, marker):
     new_row = [''] # date is empty
     for priority in priorities:
         new_row.append(priority)
-        new_row.append(0) # individual scores are zero until measured
+        # Individual scores are zero until measured: raw and normalized.
+        new_row.append(0)
+        new_row.append(0)
     new_row.append(0) # combined score is zero until measured
     data.loc[len(data)] = new_row
 
