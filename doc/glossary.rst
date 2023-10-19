@@ -5,34 +5,34 @@ Glossary
 .. glossary::
 
     Authentication Config
-        JSON file specifying 3rd party authentication details for use in metric sources. E.g., Google API keys.
+        A JSON file that contains details for third-party authentication, such as Google API keys, which are used in metric sources.
 
     Layer
-        One level of combining individual metrics into a higher-level metric that represents their collective behavior as a single indicator.
+        A grouping mechanism that combines individual metrics to create a higher-level metric, representing the collective behavior of these metrics as a single indicator.
 
     Layer Config
-        JSON file specifying a layer.
+        A JSON file used to specify the configuration of a layer.
 
     Layer Data
-        CSV file containing a time series for individual layer metric scores as well as overall layer scores.
+        A CSV file that stores time series data for individual and overall scores of metrics forming a layer.
 
     Layer Score
-        Weighted average of normalized metric scores of a layer.
+        A weighted average of normalized metric scores within a layer.
 
     Metric
-        A system or standard of measurement: a way to express performance of something as a number.
+        A system or standard of measurement used to express the performance of something as a numerical value.
 
     Metric Score
-        A number obtained as a result of taking a metric measurement.
+        A numeric result obtained by taking a metric measurement.
 
     Metric Source
-        Implementation of functions producing raw and normalized scores for a metric.
+        An implementation of functions that generate raw and normalized scores for a specific metric.
 
     Metric Weight
-        Weight of a metric in a layer in a form of a floating-point value between ``0`` and ``1``. Sum of weights of all metrics in the layer should equal to ``1``.
+        The weight assigned to a metric within a layer represented as a floating-point value between ``0`` and ``1``. The sum of weights for all metrics in a layer should equal ``1``.
 
     Normalized Metric Score
-        Raw metric score converted into a floating-point value between ``0`` and ``1``. Often set in the context of a goal. E.g., if a project has a goal of reaching 1000 GitHub stars the normalized metric may be defined as ``max(raw_metric_score/2000, 1)``. This way it receives scores below ``0.5`` if the goal is not yet met and scores of ``0.5`` or higher for meeting / exceeding the goal.
+        A floating-point value between ``0`` and ``1``, representing a normalized version of a raw metric score. This normalization is often defined in the context of a goal. For example, if a project has a goal of reaching 1000 GitHub stars, it may be calculated as ``max(raw_metric_score/2000, 1)`` to assign scores below ``0.5`` if the goal hasn't been met and scores of ``0.5`` or higher if the goal has been achieved or exceeded.
 
     Raw Metric Score
-        User-friendly metric score. E.g., number of stars of a GitHub project.
+        The user-friendly, unaltered score for a metric. For instance, it could be the number of stars for a GitHub project.
