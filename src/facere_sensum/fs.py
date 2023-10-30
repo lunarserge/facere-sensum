@@ -13,6 +13,7 @@ import datetime
 import numpy as np
 import pandas as pd
 import prettytable
+import matplotlib.pyplot as plt
 
 VERSION = '0.0.5'
 
@@ -95,6 +96,19 @@ def _print_report(metrics, scores):
     print()
     print(table)
 
+def _load_log(config):
+    '''
+    Load the log file and return its contents as a dataframe.
+    'config' is project config in JSON form.
+    '''
+    log_file = config['log']
+    try:
+        data = pd.read_csv(log_file)
+    except FileNotFoundError:
+        print('Log file \''+log_file+'\' not found. Exiting.')
+        sys.exit(1)
+    return data.astype({'ID': 'string'})
+
 def command_update(config, log_file, marker):
     '''
     Process the log file by scoring all the metrics and updating priorities for the future.
@@ -103,12 +117,7 @@ def command_update(config, log_file, marker):
     'log_file' is the name for the log.
     'marker' is the identificator to be used with the scoring (e.g., the date of data collection).
     '''
-    try:
-        data = pd.read_csv(log_file)
-    except FileNotFoundError:
-        print('Log file \''+log_file+'\' not found. Exiting.')
-        sys.exit(1)
-    data = data.astype({'ID': 'string'})
+    data = _load_log(config)
 
     priorities = data.iloc[-1,1:-1:3] # pick priorities from the last row
     priorities_combined = sum(priorities)
@@ -156,6 +165,32 @@ def command_update(config, log_file, marker):
     print(log_file, 'is updated')
     return score_comb
 
+def command_chart(config):
+    '''
+    Draw a chart for project's combined scores over time.
+    'config' is project config in JSON form.
+    '''
+    chart_file = config['id']
+    data = _load_log(config)[:-1]
+    fig, axes = plt.subplots()
+    axes.set_title(chart_file)
+    scores = data['Score']
+
+    # Set the Y axis limits so that users have a better chance to notice that only part
+    # of Y axis scale is shown while at the same time seeing the change in the scores as well.
+    min_score, max_score = min(scores), max(scores)
+    diff = max_score-min_score
+    min_limit, max_limit = max(min_score-diff,0), min(max_score+diff,1)
+    if min_limit < max_limit:
+        axes.set_ylim(min_limit, max_limit)
+    else:
+        axes.set_ylim(auto=True) # Avoids matplotlib warning in case of constant metric scores.
+
+    axes.plot([datetime.date.fromisoformat(date) for date in data['ID']], scores)
+    fig.autofmt_xdate()
+    fig.savefig(chart_file)
+    print(chart_file, '.png is created', sep='')
+
 def get_3rd_party_entry(party, entry):
     '''
     Get 3rd parthy entry from the authentication config.
@@ -176,7 +211,7 @@ def main():
     CLI entry.
     '''
     parser = ArgumentParser(description='Make sense of the turmoil')
-    parser.add_argument('command', choices=['create', 'update'],
+    parser.add_argument('command', choices=['create', 'update', 'chart'],
                         help='high-level action to perform')
     parser.add_argument('--version', action='version', version='%(prog)s '+VERSION)
     parser.add_argument('--auth', nargs='?', help='authentication config')
@@ -208,6 +243,8 @@ def main():
     elif args.command == 'update':
         command_update(config, log, datetime.date.today())
         print('\nSee you next time!')
+    elif args.command == 'chart':
+        command_chart(config)
     else: # pragma: no cover
         # Should never get here given that all the actions are processed above.
         print('Something weird happened.',

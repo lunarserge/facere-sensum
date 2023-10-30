@@ -7,6 +7,7 @@ Key ``facere-sensum`` features are:
 * Growing collection of pre-defined lowest level metrics.
 * API for bringing your own metrics.
 * Automatic calculation of higher-level metrics to reflect collective metric behavior.
+* Generation of charts for metrics behavior over time.
 
 ******************
 Formal Definitions
@@ -18,6 +19,7 @@ A layer is defined by a JSON file with the following informally described scheme
 
     {
         "log": "CSV file for storing layer data",
+        "id": "string: layer id",
         "weights": ["static", "dynamic"],
         "metrics": [
             {
@@ -31,6 +33,7 @@ A layer is defined by a JSON file with the following informally described scheme
     }
 
 * ``log`` (required): the name of CSV file for storing layer data. For the most part users do not need to work with the log file directly, but in the current version of ``facere-sensum`` the result (higher level metric values reflecting collective behavior of layer metrics) is obtained directly from there.
+* ``id`` (optional): is a string with a short text description of the layer. Currently, layer ``id`` is used for the output file name in ``chart`` command (see :ref:`here <facere-sensum-commands>`).
 * ``weights`` (optional, defaults to ``static``) specifies the approach for calculating metric weights. ``static`` always uses the weights specified in this JSON file as is. ``dynamic`` adjusts metric weights over time based on their scores, so that those metrics that don't perform well receive more weight. See :ref:`dynamic-vs-static-weights` for details.
 * ``metrics`` (required): the array of individual metrics that collectively form a layer:
 
@@ -84,9 +87,12 @@ Command line options:
 * ``--auth [AUTH]``: path to JSON file with authentication config for sourcing metrics from third parties. This option is only necessary if using metric sources that require such authentication.
 * ``--config [CONFIG]``: path to JSON file defining ``facere-sensum`` layer to compute. Specifying the layer config is required, but the use of this option is not required since ``config.json`` will be used by default if it is missing.
 
-``facere-sensum`` has two main commands:
+.. _facere-sensum-commands:
+
+``facere-sensum`` has the following commands:
 
 * ``create``: create a CSV file for storing the layer data as per JSON layer config.
 * ``update``: capture metrics per JSON config and update the CSV file with a new row of corresponding values and their collective score (weighted sum).
+* ``chart``: create a PNG file with a chart for layer's collective score over time.
 
-Typically, a user would use ``create`` command once per layer and then run ``update`` commands either manually or by automation to update metric values. In the current version the result is supposed to be taken by the user directly from the CSV file, rightmost (``Score``) column.
+Typically, a user would use ``create`` command once per layer and then run ``update`` commands either manually or by automation to update metric values. In the current version the result is supposed to be taken by the user directly from the CSV file, rightmost (``Score``) column. User can also choose to create a graphical representation of the layer using ``chart`` command.
