@@ -2,11 +2,11 @@
 Introduction
 ############
 
-``facere-sensum`` is a general-purpose metrics framework that helps measure anything in a form of a meaningful number. It allows to combine individual metrics into a higher-level metric that represents collective behavior as a single indicator.
+``facere-sensum`` is a general-purpose metrics framework designed to quantify anything in a meaningful numerical format. It permits the aggregation of individual metrics to create higher-level metrics that reflect collective behavior with a single indicator.
 
-By doing that, ``facere-sensum`` provides a formal way for product management to define priorities and goals for development work. On the receiving end, ``facere-sensum`` enables development teams to determine where exactly their effort needs to focus to hit the goal.
+In practical terms, ``facere-sensum`` offers a structured approach for product management to establish development priorities and objectives. For development teams, it serves as a tool to pinpoint the specific areas where their efforts should be concentrated to achieve the desired goal.
 
-See below for the overall methodology description and :doc:`examples <examples>` section for a sample of its practical application.
+For a more comprehensive understanding of this methodology, please refer to the general methodology description below and explore the sample use cases provided in the :doc:`examples <examples>` section.
 
 .. _the-approach:
 
@@ -14,18 +14,25 @@ See below for the overall methodology description and :doc:`examples <examples>`
 The Approach
 ************
 
-The key idea behind ``facere-sensum`` is that metrics can be combined into tree-like structures where leaf nodes represent individual metrics and joints represent collective metrics for subtrees growing from them. E.g., imagine you are tracking SEO (Search Engine Optimization) efficiency metric for your company. The company has several projects. Each project has a landing page that you want to be found by web searches using certain phrases (search terms). There are multiple search terms per project.
+The core concept of ``facere-sensum`` revolves around the idea that metrics can be organized into a hierarchical structure resembling a tree. In this structure, the individual metrics are represented as leaf nodes, while collective metrics for groups of metrics are represented as nodes that connect to their respective subgroups. To illustrate, let's consider a scenario where you are monitoring the efficiency of your company's SEO (Search Engine Optimization) efforts. The company manages multiple projects, and each of these projects has its own dedicated landing page. The goal is to ensure that these landing pages are discoverable in web searches conducted using specific keywords or search terms. Each project is associated with multiple search terms to optimize its online visibility.
 
-Here we have several levels of metrics:
+In this example, there are several levels of metrics:
 
-* On the lowest level there are individual metrics for how well specific project landing page is found using specific search term.
-* Next level combines search terms for a particular project and yields a single-number metric for how well project landing page is found across *all* the search terms.
-* Finally, the top level - top of the tree - is just one single number reflecting how well the company does SEO across *all* its projects.
+* At the lowest level, you have individual metrics that assess how effectively each project's landing page is discovered using specific search terms.
+* Moving up to the next level, these search terms for a particular project are combined to produce a single numerical metric that gauges how well the project's landing page performs across *all* the associated search terms.
+* Finally, at the top level, which is the highest point in the metric hierarchy, you arrive at a single numerical metric that reflects the overall SEO performance of the entire company across *all* its projects.
 
-This example is using homogeneous metrics, but in practice metrics can get heterogeneous. E.g., you can imagine even higher level which combines SEO efficiency with something different like uptime metric for landing pages. To abstract away such differences, ``facere-sensum`` is using normalized metric values at all levels. The values must be a floating-point number between ``0`` and ``1``, with ``0`` indicating inferior performance, ``1`` indicating perfect performance and other values indicating varying level of performance in between. This is how it works at various levels:
+This hierarchical structure allows for a comprehensive assessment of SEO performance, from specific details at the bottom level to the overall company performance at the top level.
 
-* Lowest level metrics should be defined to support this directly. E.g., in the SEO example, lowest level metric (for project / search term pair) can be defined as ``1`` if the landing page shows up first in search results, 0.9 if it shows up second and so forth. The metric becomes ``0`` if the landing page is not found in the top ten search results.
-* Higher level metrics are calculated automatically by ``facere-sensum`` as a weighted average of the corresponding lower-level metric values, with weights totaling to ``1``. This happens on all levels above the lowest. Since lower-level metric values are between ``0`` and ``1`` and weights are totaling to ``1`` this yields higher level metric values between ``0`` and ``1`` as well:
+In this example, we're working with metrics that are relatively uniform, but in practice, metrics can become diverse. For instance, you can envision a higher-level metric that combines SEO efficiency with something entirely different, such as the uptime metric for landing pages. To address such variations, ``facere-sensum`` distinguishes between raw and normalized metric scores.
+
+* **Raw Metric Score**: This is the original, user-friendly score for a metric. For instance, it could represent the ranking of a project's landing page in web search results for a particular search term.
+* **Normalized Metric Score**: This score is a floating-point number between ``0`` and ``1``. A score of ``0`` indicates poor performance, ``1`` signifies perfect performance, and other values represent varying levels of performance in between. In the context of the SEO example, the lowest-level normalized metric score (for a project and search term combination) might be defined as ``1`` if the landing page appears first in search results, ``0.9`` if it's second, and so on. The metric score becomes ``0`` if the landing page doesn't appear in the top ten search results. This normalization process allows for consistent and comparable evaluation of metrics, even when they originate from different domains.
+
+Here's how the system operates at different levels:
+
+* At the lowest level, metrics should be defined to directly support both raw and normalized scores. ``facere-sensum`` offers an expanding collection of predefined lowest level metrics, and you can also create your own custom ones by referring to the :ref:`instructions for bringing your own metric <bringing-your-own-metric>`.
+* At higher metric levels, raw and normalized scores maintain the same value. These scores are automatically calculated by ``facere-sensum`` as a weighted average of the corresponding lower-level normalized metric scores with weights adding up to a total of ``1``. This calculation occurs at all levels above the lowest. Given that lower-level metric normalized scores fall within the range of ``0`` to ``1``, and the weights sum to ``1``, this process results in higher-level metric scores also falling within the range of ``0`` to ``1``:
 
 .. math::
 
@@ -33,36 +40,27 @@ This example is using homogeneous metrics, but in practice metrics can get heter
 
    \sum_{i=0}^{N}weight_i = 1
 
-While not a strict requirement, it is helpful to define lowest-level metrics such that 'successful' metric value is around ``0.5`` with higher values indicating performing above the business goal and lower values indicating performing below the business goal. If lowest-level metrics defined in this way then metrics on all levels can be used not only as a number that has relative value over time, but also as an indicator of being successful or not on an appropriate level.
+Although it's not an absolute requirement, it is advantageous to define lowest-level metrics in a manner where a 'successful' normalized metric score hovers around ``0.5``. Higher normalized scores should indicate that performance exceeds the business goal, while lower normalized scores should suggest that performance falls short of the business goal. When lowest-level metrics are defined in this way, metrics at all levels can serve not only as numerical data with relative scores over time but also as indicators of success or failure at the appropriate level.
 
-SEO efficiency metric is used here for illustrative purpose. In general, any kind of metrics can fit with this approach.
+For illustration, we've used the SEO efficiency metric, but in practice, this approach can be applied to various types of metrics.
 
 *******************************
 Use by Product Management Teams
 *******************************
 
-Product management teams would use ``facere-sensum`` to:
+Product management teams harness ``facere-sensum`` for several key purposes:
 
-* Specify hierarchy of metrics.
-* Define normalized lowest-level metrics.
-* Define weights for calculating higher-level metrics.
-* Set goals for metrics at the appropriate level.
-
-While metric weights on a particular level should total to ``1``, specifying different relative weights would indicate that some metrics are more important than others to the overall success (more important metrics receive bigger weights).
-
-The goals can be set on any metric level, but it gets more interesting on higher levels since this gives development teams flexibility in deciding how to achieve it. E.g., in SEO example product management can specify goals for each combination of project / search term. But that would be micromanagement. It is better to set goals for higher-level metrics like SEO efficiency for a product across search terms or even one goal for overall SEO across products - and leave it to development to decide how to hit the goal.
+* **Hierarchy of Metrics**: They use the framework to establish a structured hierarchy of metrics, defining the relationships between different metrics at various levels.
+* **Lowest-Level Metrics**: Product management teams define both raw and normalized scoring for lowest-level metrics.
+* **Weight Allocation**: They specify the weights used in calculating higher-level metrics. While lower-level metric weights on a particular level should sum to ``1``, specifying different relative weights would indicate that some metrics are more important than others to the overall success (more important metrics receive bigger weights).
+* **Metric Goals**: Setting specific metric goals is another important aspect. While these goals can be set at any metric level, it becomes particularly interesting when established at higher levels. For instance, in the context of an SEO example, product management can define goals for each combination of project and search term. However, this approach may lead to micromanagement. A more effective strategy is to set goals for higher-level metrics, such as SEO efficiency for a product across search terms or even a single goal for overall SEO performance across all products. This approach empowers development teams to determine the most efficient strategies to achieve these goals.
 
 ************************
 Use by Development Teams
 ************************
 
-Development teams would use ``facere-sensum`` to:
+Development teams utilize ``facere-sensum`` for three primary purposes:
 
-* Understand if the goal is achievable.
-* Define focus areas and track execution.
-
-After the full parenthesis expansion, higher-level metric calculation on any level comes down to a sum of the lowest-level metrics with weights. For each of the lowest-level metrics the development team can assess how much it can be realistically improved. And then using weights and the full equation they can see if the higher-level goal will be achieved assuming such improvements in the lowest-level metrics.
-
-After negotiating the achievable goal with the product management, development team can determine specific focus areas. While improving each metric to the limit is the best if your team has infinite resources, in practice it is typically not needed if the overall goal was set reasonably. In this case the development team has the flexibility to decide which of the lower-level metrics should be improved and how much so that the overall goal is achieved. They will make this determination using ROI (return on investment) analysis. Typically, it is a good idea to look at lowest-level metrics that are easiest to improve while having bigger weight in the overall equation.
-
-Once the development team has a plan like this, they can use ``facere-sensum`` to automatically update higher-level metrics to track the progress.
+* **Assess Goal Feasibility**: They employ the framework to evaluate whether the established goals are realistically attainable. This evaluation may involve breaking down the tree of higher-level metrics all the way into a sum of weighted lowest-level metrics. The development team examines the potential for practical improvements in each lowest-level metric. By applying weights and the full equation, they can determine if the higher-level goal can be reached, assuming these improvements in the lowest-level metrics.
+* **Focus Area Definition**: Following negotiations with the product management to establish achievable goals, the development team identifies specific focus areas. While striving to maximize improvement in every metric would be ideal under unlimited resources, it's generally unnecessary in practice when goals are reasonably set. In such scenarios, the development team has the flexibility to decide which lower-level metrics should be enhanced and to what extent, ensuring that the overall goal is met. They make these decisions using ROI (return on investment) analysis. Typically, it is advisable to prioritize the lowest-level metrics that are both easier to improve and carry a greater weight in the overall equation.
+* **Execution Tracking and Communication**: Once the development team has formulated a plan based on these principles, they can use ``facere-sensum`` to automatically update higher-level metrics. This functionality facilitates tracking and monitoring progress, enabling the team to communicate their progress back to the product management.
