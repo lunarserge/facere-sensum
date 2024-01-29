@@ -69,7 +69,7 @@ Authentication for Sourcing Metrics from Third Parties
 
 Sometimes, accessing a data source requires authentication. For instance, tracking search engine optimization with Google necessitates an API key and a search engine ID to access the required Google services. These keys are application-wide and not specific to a particular ``facere-sensum`` layer, so they are provided by a separate JSON file. :doc:`The data sources <sources>` section provides details on the authentication format, if required by a specific source type.
 
-In essence, an authentication configuration JSON file typically resembles the following format:
+In essence, an authentication configuration JSON file typically resembles the following format::
 
     {
         "Third-Party Name (e.g., Google)": {
