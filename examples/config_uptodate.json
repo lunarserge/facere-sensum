@@ -1,0 +1,24 @@
+{
+    "log": "log.csv",
+    "metrics": [
+        {
+            "id": "From Late Nov",
+            "priority": 0.3,
+            "source": "uptodate",
+            "updated": "2023-11-21"
+        },
+        {
+            "id": "From Start of Feb",
+            "priority": 0.3,
+            "source": "uptodate",
+            "updated": "2024-02-01",
+            "target": 100
+        },
+        {
+            "id": "From Long Time Back",
+            "priority": 0.4,
+            "source": "uptodate",
+            "updated": "2021-02-02"
+        }
+    ]
+}
