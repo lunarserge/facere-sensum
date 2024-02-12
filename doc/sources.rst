@@ -43,18 +43,6 @@ See `Custom Search JSON API <https://developers.google.com/custom-search/v1/over
 
 See `customsearch JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_customsearch.json>`_ for an example of using the ``customsearch`` data source.
 
-``uplevel``
-===========
-
-Uplevels collective metric behavior to a higher-level via computing the weighted sum of the corresponding lower-level metric values. This data source supports key ``facere-sensum`` idea of combining metrics into tree-like structures. See :ref:`here <the-approach>` for details.
-
-JSON config fields for metrics using source ``uplevel``:
-
-* ``"source": "uplevel"``
-* ``"log"`` (required): CSV file storing the data for ``facere-sensum`` layer that is being upleveled.
-
-See `uplevel JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
-
 ``GitHub``
 ==========
 
@@ -100,6 +88,31 @@ JSON config fields for metrics using source ``GitHub.watch``:
 * ``"source": "GitHub.watch"``
 * ``"repo"`` (required): GitHub repository.
 * ``"target"`` (optional, defaults to ``50``): target success number of GitHub watchers for the metric value to hit ``0.5``.
+
+``uplevel``
+===========
+
+Uplevels collective metric behavior to a higher-level via computing the weighted sum of the corresponding lower-level metric values. This data source supports key ``facere-sensum`` idea of combining metrics into tree-like structures. See :ref:`here <the-approach>` for details.
+
+JSON config fields for metrics using source ``uplevel``:
+
+* ``"source": "uplevel"``
+* ``"log"`` (required): CSV file storing the data for ``facere-sensum`` layer that is being upleveled.
+
+See `uplevel JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
+
+``uptodate``
+============
+
+Tracks assets to be up to date by calculating number of days passed since an asset was updated last time. The date of the asset's last update should be manually corrected in the config file if the asset receives an update. This metric is useful, e.g., for tracking products that need their collateral regularly updated.
+
+JSON config fields for metrics using source ``uptodate``:
+
+* ``"source": "uptodate"``
+* ``"updated"`` (required): string in ISO 8601 format representing the date when the asset was updated last time.
+* ``"target"`` (optional, defaults to ``365``): number of days passed for the metric normalized score to hit ``0.5``. The normalized score will be above ``0.5`` for newer assets and below ``0.5`` for older assets.
+
+See `uptodate JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uptodate.json>`_ for an example of using the ``uptodate`` data source.
 
 ``user``
 ========
