@@ -1,38 +1,45 @@
-############
-Data Sources
-############
+##############
+Metric Sources
+##############
 
-This chapter describes details of metric data sources.
+This chapter provides detailed information about various metric data sources.
 
-************************
-Pre-Defined Data Sources
-************************
+**************************
+Pre-Defined Metric Sources
+**************************
 
 ``const``
 =========
 
-Specifies a constant to be used as a metric value. This source is useful for metrics that need to be entered manually, but also rarely change.
+Specifies a constant value to be used as a metric score, both in its raw form and normalized. This source is suitable for metrics that require manual input and remain relatively constant.
 
-JSON config fields for metrics using source ``const``:
+Layer config fields for metrics using source ``const``:
 
-* ``"source": "const"``
-* ``"value"`` (required): floating-point value between 0 and 1 to be used as the metric value.
+* ``"source"``: ``"const"``
+* ``"value"`` (required): floating-point value between ``0`` and ``1`` to serve as the metric score.
 
 ``customsearch``
 ================
 
-Captures search engine optimization efficiency with Google search. It looks at the top ``N`` results with certain search phrase and calculates the metric value as following:
+Measures web search efficiency via the `Google Programmable Search Engine <https://developers.google.com/custom-search/v1/overview>`_. While not identical to Google search, it may be rather close. E.g., refer to `this article <https://www.oncrawl.com/technical-seo/custom-search-analyzing-search-intent-googles-programmable-search-engine-json-api>`_ for considerations.
 
-* ``0`` if the target web page is not found in the top ``N`` results.
-* ``(N+1-n) / N`` if the target web page is found as n\ :sup:`th` result. It is easy to see that this equals to ``1`` if the target page is the first search result and then linearly decreases until it becomes ``0``.
+The ``customsearch`` metric source analyzes the top ``N`` search results for a specific search phrase and calculates the raw metric score as follows:
 
-JSON config fields for metrics using source ``customsearch``:
+* ``0`` if the target web page is not among the top ``N`` results.
+* ``n`` if the target web page ranks as the n\ :sup:`th` result.
 
-* ``"source": "customsearch"``
-* ``"URL"`` (required): target web page.
-* ``"num"`` (optional, defaults to ``50``): number of search results to consider.
+The normalized score is calculated as follows:
 
-Since this source accesses Google services, authentication details need to be provided using ``--auth`` command line option. Authentication JSON file needs to have the following entry::
+* ``0`` if the target web page is not among the top ``N`` results.
+* ``(N+1-n) / N`` if the target web page ranks as the n\ :sup:`th` result. This equals to ``1`` if the target page is the first search result and then linearly decreases to ``0``.
+
+Layer config fields for metrics using source ``customsearch``:
+
+* ``"source"``: ``"customsearch"``
+* ``"URL"`` (required): Target web page.
+* ``"num"`` (optional, defaults to ``50``): Number of search results to consider.
+
+Since this source accesses Google services, authentication details must be provided using the ``--auth`` command line option. Authentication config needs to have the following entry::
 
     "Google": {
         "custom search API key": "API key goes here",
@@ -41,89 +48,76 @@ Since this source accesses Google services, authentication details need to be pr
 
 See `Custom Search JSON API <https://developers.google.com/custom-search/v1/overview>`_ for information about Google API key and search engine ID.
 
-See `customsearch JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_customsearch.json>`_ for an example of using the ``customsearch`` data source.
+See `customsearch layer config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_customsearch.json>`_ for an example of using the ``customsearch`` metric source.
 
 ``GitHub``
 ==========
 
-Captures metrics for GitHub projects. See subsections for specific metrics.
+Captures metrics for stars, forks, and watchers in GitHub projects.
 
-GitHub does not require authenticated access, but rate limits are higher if a personal access token is provided. The personal access token can be provided using ``--auth`` command line option. Authentication JSON file needs to have the following entry::
+The raw metric score represents the absolute number of stars, forks, or watchers.
+
+The normalized score is calculated as follows:
+
+* ``n / (2*t)`` where ``n`` is the raw score and ``t`` is a success target. This equals ``0.5`` if the raw score matches the target, less than ``0.5`` if below the target, and more than ``0.5`` if above the target.
+* ``1`` if the raw score is more than double the target.
+
+Layer config fields for metrics using source ``GitHub``:
+
+* ``"source"``: ``"GitHub.star"``, ``GitHub.fork``, or ``GitHub.watch``
+* ``"repo"`` (required): GitHub repository.
+* ``"target"`` (optional, defaults to ``1000`` for stars / ``100`` for forks / ``50`` for watchers): Success target.
+
+GitHub does not require authenticated access, but providing a personal access token can increase rate limits. The personal access token can be provided using ``--auth`` command line option. Authentication config needs to have the following entry::
 
     "GitHub": {
         "personal access token": "token goes here"
     }
 
-See `GitHub JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_github.json>`_ for an example of using GitHub data sources.
-
-``GitHub.star``
----------------
-
-Captures number of GitHub stars against the target.
-
-JSON config fields for metrics using source ``GitHub.star``:
-
-* ``"source": "GitHub.star"``
-* ``"repo"`` (required): GitHub repository.
-* ``"target"`` (optional, defaults to ``1000``): target success number of GitHub stars for the metric value to hit ``0.5``.
-
-``GitHub.fork``
----------------
-
-Captures number of GitHub forks against the target.
-
-JSON config fields for metrics using source ``GitHub.fork``:
-
-* ``"source": "GitHub.fork"``
-* ``"repo"`` (required): GitHub repository.
-* ``"target"`` (optional, defaults to ``100``): target success number of GitHub forks for the metric value to hit ``0.5``.
-
-``GitHub.watch``
-----------------
-
-Captures number of GitHub watchers against the target.
-
-JSON config fields for metrics using source ``GitHub.watch``:
-
-* ``"source": "GitHub.watch"``
-* ``"repo"`` (required): GitHub repository.
-* ``"target"`` (optional, defaults to ``50``): target success number of GitHub watchers for the metric value to hit ``0.5``.
+See `GitHub layer config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_github.json>`_ for an example of using GitHub metric sources.
 
 ``uplevel``
 ===========
 
-Uplevels collective metric behavior to a higher-level via computing the weighted sum of the corresponding lower-level metric values. This data source supports key ``facere-sensum`` idea of combining metrics into tree-like structures. See :ref:`here <the-approach>` for details.
+Elevates collective metric behavior to a higher level by computing the weighted sum of corresponding lower-level normalized metric scores. This source supports the key ``facere-sensum`` idea of combining metrics into tree-like structures. See :ref:`here <the-approach>` for details. The same weighted sum is used as both raw and normalized metric score.
 
-JSON config fields for metrics using source ``uplevel``:
+Layer config fields for metrics using source ``uplevel``:
 
-* ``"source": "uplevel"``
-* ``"log"`` (required): CSV file storing the data for ``facere-sensum`` layer that is being upleveled.
+* ``"source"``: ``"uplevel"``
+* ``"log"`` (required): Layer data for ``facere-sensum`` layer being elevated.
 
-See `uplevel JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` data source.
+See `uplevel layer config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uplevel.json>`_ for an example of using the ``uplevel`` metric source.
 
 ``uptodate``
 ============
 
-Tracks assets to be up to date by calculating number of days passed since an asset was updated last time. The date of the asset's last update should be manually corrected in the config file if the asset receives an update. This metric is useful, e.g., for tracking products that need their collateral regularly updated.
+Monitors assets for their update status by calculating the number of days since the asset was last updated. This metric is useful for tracking products or their collateral that require regular updates.
 
-JSON config fields for metrics using source ``uptodate``:
+The raw metric score reflects the number of days since the asset was last updated.
 
-* ``"source": "uptodate"``
-* ``"updated"`` (required): string in ISO 8601 format representing the date when the asset was updated last time.
-* ``"target"`` (optional, defaults to ``365``): number of days passed for the metric normalized score to hit ``0.5``. The normalized score will be above ``0.5`` for newer assets and below ``0.5`` for older assets.
+The normalized score is calculated as follows:
 
-See `uptodate JSON config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uptodate.json>`_ for an example of using the ``uptodate`` data source.
+* ``1 - n / 2*t`` where ``n`` is the raw score and ``t`` is the expiration target. This is less than ``0.5`` if the raw score exceeds the expiration target, ``0.5`` if it matches the target, and greater than ``0.5`` if it falls below the target.
+* ``0`` if the raw score is more than double the expiration target.
+
+Layer config fields for metrics using source ``uptodate``:
+
+* ``"source"``: ``"uptodate"``
+* ``"updated"`` (required): Date in ISO 8601 format representing the last update of the asset. This date should be manually corrected if the asset receives an update.
+* ``"target"`` (optional, defaults to ``365``): Expiration target, indicating the number of days for the metric's normalized score to decrease to ``0.5``.
+
+See `uptodate layer config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uptodate.json>`_ for an example of using the ``uptodate`` metric source.
 
 ``user``
 ========
 
-Prompts a user to enter the value manually. This source is useful for metrics that can not be automatically computed.
+Prompts a user to manually enter the metric score. The entered value serves as both the raw and normalized metric score. This source is suitable for metrics that cannot be automatically computed.
 
-JSON config fields for metrics using source ``user``:
+Layer config fields for metrics using source ``user``:
 
-* ``"source": "user"``
+* ``"source"``: ``"user"``
 
-Source ``user`` does not use any additional fields.
+The ``user`` metric source does not utilize any additional fields.
 
 .. _bringing-your-own-metric:
 
