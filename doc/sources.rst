@@ -125,6 +125,20 @@ The ``user`` metric source does not utilize any additional fields.
 Bringing Your Own Metric
 ************************
 
-``facere-sensum`` provides a simple API for bringing your own metric data sources.
+The ``facere-sensum`` framework allows you to easily add your own metric sources by defining Python modules in the ``src/facere_sensum/connectors`` directory. This feature enables users to tailor the framework to their specific needs by integrating custom metrics directly into the system. These custom metrics can be defined and managed within their respective Python modules, allowing for a seamless integration and extension of ``facere-sensum``'s capabilities.
 
-TO BE ADDED
+Let's assume you want to define your own metric source named ``byom``. Follow these steps:
+
+* Create a module named ``byom.py`` and place it in the ``src/facere_sensum/connectors`` folder.
+* In your layer configs, reference your metric using the ``byom`` source. Include necessary fields such as ``id``, ``weight``, and any other fields that are required for your metric.
+
+In your ``byom.py`` module, define the following two functions to handle metric calculations:
+
+* ``get_raw(metric)``: This function should calculate and return a raw score for your metric. For example, if you are tracking a search engine optimization (SEO) metric, this function might return the ranking of a search term in Google search results. The ``metric`` argument passed to this function will contain the part of the layer config that pertains to your metric, including mandatory fields such as ``id``, ``source``, and ``weight``. You can also include additional fields specific to your metric's needs. For instance, an SEO metric would likely require at least a target URL.
+* ``get_normalized(metric, raw)``: This function should convert the raw score obtained from ``get_raw(metric)`` into a normalized score, which should be a floating-point value ranging from ``0`` to ``1``. The ``metric`` argument has the same structure and meaning as in ``get_raw(metric)``. The ``raw`` argument is the raw score output from the corresponding call to ``get_raw(metric)``. For guidance on how to best normalize metrics, refer :ref:`here <the-approach>`.
+
+Metrics that are related can be organized into subfolders. For example, all GitHub-related metrics are located in a subfolder named ``GitHub`` within ``src/facere_sensum/connectors``. A specific metric like the number of GitHub stars would be defined in a file called ``star.py`` inside the ``GitHub`` folder. In the layer config, this metric would be referenced as ``GitHub.star``. It's important to note the dot notation used here (``GitHub.star``) - it follows Python's module import syntax.
+
+That's it! ``facere-sensum`` doesn't require any additional registration for your metric - it just searches for a module with the corresponding name within the ``src/facere_sensum/connectors`` directory.
+
+All metrics included with ``facere-sensum`` follow the same implementation protocol, so numerous examples are available. You can find included metric definitions at `this GitHub repository <https://github.com/lunarserge/facere-sensum/tree/main/src/facere_sensum/connectors>`_ and corresponding layer configs at `this link <https://github.com/lunarserge/facere-sensum/tree/main/examples>`_.
