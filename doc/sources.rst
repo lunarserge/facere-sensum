@@ -119,6 +119,25 @@ Layer config fields for metrics using source ``user``:
 
 The ``user`` metric source does not utilize any additional fields.
 
+``validlink``
+=============
+
+Tracks the validity of web page links by checking if the URL produces a 404 error.
+
+The raw metric score is calculated as follows:
+
+* ``0`` if accessing the web page with the URL produces a 404 error.
+* ``1`` otherwise.
+
+The normalized score is the same as the raw score.
+
+Layer config fields for metrics using source ``validlink``:
+
+* ``"source"``: ``"validlink"``
+* ``"URL"`` (required): URL of the web page to track.
+
+See `validlink layer config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_validlink.json>`_ for an example of using the ``validlink`` metric source.
+
 .. _bringing-your-own-metric:
 
 ************************
