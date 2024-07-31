@@ -91,9 +91,9 @@ See `uplevel layer config <https://github.com/lunarserge/facere-sensum/tree/main
 ``uptodate``
 ============
 
-Monitors assets for their update status by calculating the number of days since the asset was last updated. This metric is useful for tracking products or their collateral that require regular updates.
+Monitors assets for their up to date status by calculating the number of days since the asset was last reviewed or updated. This metric is useful for tracking products or their collateral that require regular updates.
 
-The raw metric score reflects the number of days since the asset was last updated.
+The raw metric score reflects the number of days since the asset was last reviewed or updated.
 
 The normalized score is calculated as follows:
 
@@ -103,7 +103,9 @@ The normalized score is calculated as follows:
 Layer config fields for metrics using source ``uptodate``:
 
 * ``"source"``: ``"uptodate"``
-* ``"updated"`` (required): Date in ISO 8601 format representing the last update of the asset. This date should be manually corrected if the asset receives an update.
+* ``"method"`` (optional, defaults to ``"manual"``): Specifies how to obtain the date of the last review or update of an asset. Possible values are ``"manual"`` and ``"github.com"``. The ``"manual"`` method uses a date provided in the ``"updated"`` field (see below). The ``"github.com"`` method indicates that the asset is hosted on GitHub, and the update date can be automatically determined from the last commit date of that file.
+* ``"updated"`` (required for ``"manual"`` method, optional otherwise): The date in ISO 8601 format representing the last update of the asset. For the ``"manual"`` method, this date is used as is. For the ``"github.com"`` method, if this field is provided, the later date between this and the automatically determined last commit date is used.
+* ``"path"`` (required for ``"github.com"`` method): The path to the file hosted on GitHub. This path should include the GitHub username and project repository as the first two elements, followed by the path to the file within the project's file structure.
 * ``"target"`` (optional, defaults to ``365``): Expiration target, indicating the number of days for the metric's normalized score to decrease to ``0.5``.
 
 See `uptodate layer config <https://github.com/lunarserge/facere-sensum/tree/main/examples/config_uptodate.json>`_ for an example of using the ``uptodate`` metric source.
