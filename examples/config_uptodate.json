@@ -16,9 +16,16 @@
         },
         {
             "id": "From Long Time Back",
-            "priority": 0.4,
+            "priority": 0.2,
             "source": "uptodate",
             "updated": "2021-02-02"
+        },
+        {
+            "id": "GitHub location",
+            "priority": 0.2,
+            "source": "uptodate",
+            "method": "github.com",
+            "path": "lunarserge/facere-sensum/examples/config_personal.json"
         }
     ]
 }
