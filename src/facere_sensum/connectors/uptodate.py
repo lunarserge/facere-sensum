@@ -15,7 +15,7 @@ _TARGET = 365
 # Index for the first commit is -1 (for test execution).
 # The testing framework replaces the default value with -1 to get predictable test result
 # since the first commit date is fixed.
-commit_index = -1 # pylint: disable=invalid-name
+commit_index = 0 # pylint: disable=invalid-name
 
 def today(): # pragma: no cover
     '''
