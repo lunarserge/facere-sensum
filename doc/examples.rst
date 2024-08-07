@@ -6,36 +6,36 @@ Examples
 Product Management and Development Teams Workflow
 *************************************************
 
-Let us use the same SEO example used in the :doc:`introduction <intro>` section but put actual actions and numbers on it. Imagine we have a company from the automobile industry. The company has two product lines: cars and trucks. Trucks are more important than cars for the company business. Key selling point for company products is safety. Plus, trucks are also known to be fuel-efficient.
+Let's use the same SEO example from the :doc:`introduction <intro>` but with specific actions and numbers. Imagine we have a company in the automobile industry with two product lines: cars and trucks. Trucks are more important to the company's business. The key selling points for the company's products are safety for all products and fuel efficiency for trucks.
 
-Here is how the work could evolve between product management and development teams. Since the problem at hand is SEO, the development team is probably from marketing department.
+Here’s how the workflow between product management and development teams might look. Since the problem at hand is SEO, the development team likely comes from the marketing department.
 
 .. _metrics-hierarchy:
 
 Step 1. Define Hierarchy of Metrics
 ===================================
 
-The organization has two product lines, so let us assume it has two separate landing pages marketing to different customer bases. The product management decides which search terms are important, so they resonate well with targeted customers. For this example, it may look like this:
+The organization has two product lines, so let’s assume it has two separate landing pages targeting different customer bases. The product management team decides which search terms are important to resonate with targeted customers. For this example, it might look like this:
 
-* For 'car' landing page: 'best car', 'safe car'
-* For 'trucks' landing page: 'best truck', 'safe truck', 'fuel-efficient truck'
+* For the 'car' landing page: 'best car', 'safe car'
+* For the 'trucks' landing page: 'best truck', 'safe truck', 'fuel-efficient truck'
 
-Together this produces the following hierarchy of metrics:
+This results is the following hierarchy of metrics:
 
 .. image:: _static/SEO-hierarchy.png
 
 Step 2. Define Normalized Lowest-Level Metrics
 ==============================================
 
-Let us assume that the current results for search terms are:
+Assume the current results for search terms are:
 
-* 'best car': not found in top ten search results.
+* 'best car': not found in the top ten search results.
 * 'safe car': 8\ :sup:`th` on the list of search results.
 * 'best truck': 8\ :sup:`th` result.
 * 'safe truck': 5\ :sup:`th` result.
-* 'fuel-efficient truck': not found in top ten search results.
+* 'fuel-efficient truck': not found in the top ten search results.
 
-Per ``facere-sensum`` rules this needs to be normalized so that metric values are between ``0`` and ``1``. Product management decides that lowest-level metric is defined as ``1`` if the landing page shows up first in search results, ``0.9`` if it shows up second and so forth. The metric becomes ``0`` if the landing page is not found in the top ten search results. This yields the following current metric values for the lowest level of the picture above:
+According to ``facere-sensum`` rules, these need to be normalized so that metric receives a score between ``0`` and ``1``. Product management decides that the lowest-level normalized metric score is defined as ``1`` if the landing page shows up first in search results, ``0.9`` if it shows up second, and so forth. The normalized metric score becomes ``0`` if the landing page is not found in the top ten search results. This yields the following current normalized metric scores for the lowest level of the picture above:
 
 .. math::
 
@@ -43,20 +43,20 @@ Per ``facere-sensum`` rules this needs to be normalized so that metric values ar
 
    SEO_{besttruck} = 0.3; SEO_{safetruck} = 0.6; SEO_{fuelefficienttruck} = 0
 
-Let assume that all these metrics created equal from the SEO success perspective and the company believes that being 6\ :sup:`th` on the list of search results for each of them individually is good enough. Being 6\ :sup:`th` would translate to normalized value of ``0.5``. We see that SEO\ :sub:`safetruck` individually is doing well, but not the other metrics.
+Let’s assume all these metrics are equally important from the SEO success perspective, and the company believes that being 6\ :sup:`th` in the search results for each term individually is good enough. Being 6\ :sup:`th` translates to a normalized metric score of ``0.5``. We see that SEO\ :sub:`safetruck` is doing well, but the other metrics are not.
 
-In the real world you'd probably want to set a higher bar for key selling point metrics like SEO\ :sub:`safecar` or SEO\ :sub:`safetruck` and for these two specifically make being 2\ :sup:`nd` or 3\ :sup:`rd` search result correspond to metric value of ``0.5``. We will refrain from that in this example to keep things simple. Notice, however, that lowest-level metrics do not need to use same scheme and can be defined individually. What matters is that in the end they have a value between ``0`` and ``1`` with the midpoint being 'successful' performance from the business perspective.
+In reality, you might set a higher bar for key selling point metrics like SEO\ :sub:`safecar` or SEO\ :sub:`safetruck`, making being 2\ :sup:`nd` or 3\ :sup:`rd` in search results correspond to a normilized metric score of ``0.5``. However, to keep things simple, we won’t do that in this example. Notice that lowest-level metrics do not need to use the same scheme and can be defined individually. What matters is that they have a normalized metric score between ``0`` and ``1``, with the midpoint being 'successful' performance from a business perspective.
 
 Step 3. Define Weights for Calculating Higher-Level Metrics
 ===========================================================
 
 The product management decides that:
 
-* For SEO\ :sub:`overall`: since trucks business is more important than cars SEO\ :sub:`trucks` gets a weight of ``0.7`` and hence SEO\ :sub:`cars` gets the remaining weight of ``0.3``.
-* For SEO\ :sub:`cars`: safety is a key selling point, so SEO\ :sub:`safecar` gets a weight of ``0.8`` and hence SEO\ :sub:`bestcar` get the remaining weight of ``0.2``.
-* Similarly for SEO\ :sub:`trucks`: SEO\ :sub:`safetruck` gets a weight of ``0.5``, SEO\ :sub:`fuelefficienttruck` gets ``0.3`` and SEO\ :sub:`besttruck` gets remaining ``0.2``.
+* For SEO\ :sub:`overall`: since the trucks business is more important than cars SEO\ :sub:`trucks` gets a weight of ``0.7`` and SEO\ :sub:`cars` gets the remaining weight of ``0.3``.
+* For SEO\ :sub:`cars`: safety is a key selling point, so SEO\ :sub:`safecar` gets a weight of ``0.8`` and SEO\ :sub:`bestcar` get the remaining weight of ``0.2``.
+* Similarly, for SEO\ :sub:`trucks`: SEO\ :sub:`safetruck` gets a weight of ``0.5``, SEO\ :sub:`fuelefficienttruck` gets ``0.3`` and SEO\ :sub:`besttruck` gets the remaining ``0.2``.
 
-Given these weights and current lowest-level metric values we are getting the following current values for higher level metrics, automatically computed by ``facere-sensum``:
+Given these weights and current lowest-level normalized metric scores, we get the following current scores for higher-level metrics, automatically computed by ``facere-sensum``:
 
 .. math::
 
@@ -73,17 +73,17 @@ Given these weights and current lowest-level metric values we are getting the fo
                  &= 0.24*0.3 + 0.36*0.7 \\
                  &= 0.072 + 0.252 = 0.324
 
-Step 4. Set Goals for Metrics at the Appropriate Level
-======================================================
+Step 4. Set Goals for Normalized Metric Scores at the Appropriate Level
+=======================================================================
 
-Most of the lowest-level metrics (SEO\ :sub:`bestcar`, SEO\ :sub:`safecar`, SEO\ :sub:`besttruck` and SEO\ :sub:`fuelefficienttruck`) are below ``0.5`` success point, so the goals might be set for each of them individually to reach success. But that would be micromanagement. It is better to set higher-level goals.
+Most of the lowest-level normalized metric scores (SEO\ :sub:`bestcar`, SEO\ :sub:`safecar`, SEO\ :sub:`besttruck` and SEO\ :sub:`fuelefficienttruck`) are below the ``0.5`` success point, so goals might be set for each individually to reach success. But that would be micromanagement. It’s better to set higher-level goals.
 
-All three higher-level metrics (SEO\ :sub:`cars`, SEO\ :sub:`trucks` and SEO\ :sub:`overall`) are below ``0.5`` as well. In this example, product management decides that just one goal will be set on the top level for the SEO\ :sub:`overall`. Currently is has the value of ``0.324``. The target is set for SEO\ :sub:`overall` to become ``0.5`` or higher which would indicate that the company generally improved SEO to a successful level across all its products.
+All three higher-level normalized metric scores (SEO\ :sub:`cars`, SEO\ :sub:`trucks` and SEO\ :sub:`overall`) are below ``0.5`` as well. In this example, product management decides to set just one goal at the top level for SEO\ :sub:`overall`. Currently it has a score of ``0.324``. The target is set for SEO\ :sub:`overall` to reach ``0.5`` or higher, indicating that the company has generally improved SEO to a successful level across all its products.
 
 Step 5. Understand If the Goal is Achievable
 ============================================
 
-The marketing department concludes that there is some SEO webpage metadata / dark magic that can be applied to improve the search for 'safe car' and 'fuel-efficient truck' terms. Assuming that both can be optimized to become 5\ :sup:`th` search result and SEO is not getting worse for other terms, this is what we are looking at after potential improvement:
+The marketing department concludes that there is some SEO webpage metadata/dark magic that can be applied to improve the search rankings for 'safe car' and 'fuel-efficient truck' terms. Assuming both can be optimized to become the 5\ :sup:`th` search result and SEO does not worsen for other terms, this is what we are looking at after potential improvement:
 
 .. math::
 
@@ -111,4 +111,4 @@ This analysis shows that the goal is achievable.
 Step 6. Define Focus Areas and Track Execution
 ==============================================
 
-We can see now that the goal of ``0.5`` is achievable by focusing SEO on improving search for two out of five search terms. Overall, this gives marketing department a goal, a way to track it, and a focus so that they know exactly which pieces of the equation they should work with.
+We can see that the goal of ``0.5`` is achievable by focusing SEO efforts on improving search rankings for two out of five search terms. This provides the marketing department with a clear goal, a way to track progress, and a focus on which aspects of the SEO strategy to prioritize.
