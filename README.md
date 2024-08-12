@@ -14,7 +14,7 @@ Comprehensive documentation is available [here](https://lunarserge.github.io/fac
 
     facere_sensum [-h] [--version] [--auth [AUTH]] [--config [CONFIG]] {create,update,chart}
 
-{create,update,chart}: high-level action to perform
+{**create**,**update**,**chart**}: high-level action to perform
 
 Options:
 *  **-h**, **--help**:    show help message and exit
