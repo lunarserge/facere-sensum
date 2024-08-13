@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run Black code format checker
+        run: |
+          pip install black
+          black --check src/facere_sensum/connectors/GitHub/_github.py
       - name: Run Pylint static code analyser
         run: |
           pip install coverage pylint
