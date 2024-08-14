@@ -12,7 +12,7 @@ Comprehensive documentation is available [here](https://lunarserge.github.io/fac
 
 # Usage
 
-    facere_sensum [-h] [--version] [--auth [AUTH]] [--config [CONFIG]] {create,update,chart}
+    facere-sensum [-h] [--version] [--auth [AUTH]] [--config [CONFIG]] {create,update,chart}
 
 {**create**,**update**,**chart**}: high-level action to perform
 
