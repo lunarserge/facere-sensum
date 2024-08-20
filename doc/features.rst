@@ -9,6 +9,8 @@ Key features of ``facere-sensum`` include:
 * Automatic computation of higher-level metrics to capture the overall behavior of metrics collectively.
 * Creation of charts to visualize the behavior of metrics over time.
 
+.. _layers:
+
 ******
 Layers
 ******

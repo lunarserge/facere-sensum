@@ -37,7 +37,8 @@ Layer config fields for metrics using source ``customsearch``:
 
 * ``"source"``: ``"customsearch"``
 * ``"URL"`` (required): Target web page.
-* ``"num"`` (optional, defaults to ``50``): Number of search results to consider.
+* ``"q"`` (optional, defaults to :ref:`metric id <layers>`): Search phrase.
+* ``"num"`` (optional, defaults to ``20``): Number of search results to consider.
 
 Since this source accesses Google services, authentication details must be provided using the ``--auth`` command line option. Authentication config needs to have the following entry::
 
