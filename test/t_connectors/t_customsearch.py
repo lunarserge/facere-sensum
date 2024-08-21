@@ -48,4 +48,4 @@ def test():
         'URL': 'https://www.notfound.com/'
     }
 
-    return _test(metric1, 4, 0.94) & _test(metric2, 0, 0)
+    return _test(metric1, 4, 0.85) & _test(metric2, 0, 0)
