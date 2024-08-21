@@ -23,7 +23,7 @@ Layer config fields for metrics using source ``const``:
 
 Measures web search efficiency via the `Google Programmable Search Engine <https://developers.google.com/custom-search/v1/overview>`_. While not identical to Google search, it may be rather close. E.g., refer to `this article <https://www.oncrawl.com/technical-seo/custom-search-analyzing-search-intent-googles-programmable-search-engine-json-api>`_ for considerations.
 
-The ``customsearch`` metric source analyzes the top ``N`` search results for a specific search phrase and calculates the raw metric score as follows:
+The ``customsearch`` metric source analyzes the top ``N`` search results for a specific search term (query) and calculates the raw metric score as follows:
 
 * ``0`` if the target web page is not among the top ``N`` results.
 * ``n`` if the target web page ranks as the n\ :sup:`th` result.
@@ -37,7 +37,7 @@ Layer config fields for metrics using source ``customsearch``:
 
 * ``"source"``: ``"customsearch"``
 * ``"URL"`` (required): Target web page.
-* ``"q"`` (optional, defaults to :ref:`metric id <layers>`): Search phrase.
+* ``"q"`` (optional, defaults to :ref:`metric id <layers>`): Search query.
 * ``"num"`` (optional, defaults to ``20``): Number of search results to consider.
 
 Since this source accesses Google services, authentication details must be provided using the ``--auth`` command line option. Authentication config needs to have the following entry::
