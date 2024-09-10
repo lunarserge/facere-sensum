@@ -20,7 +20,7 @@ def get_raw(metric):
             return float(list(csv.reader(log_file))[-2][-1])
     except FileNotFoundError:
         print(
-            "Error ('uplevel' metric source): layer data CSV file '{log}' not found. Exiting.",
+            f"Error ('uplevel' metric source): layer data CSV file '{log}' not found. Exiting.",
             file=sys.stderr,
         )
         sys.exit(1)

@@ -141,7 +141,7 @@ if __name__ == '__main__':
                        os.path.join('test', 'input', 'config_uplevel_notfound.json'),
                        'update'],
                       None,
-                      'Error (upleveling collective metric behavior connector): '
+                      'Error (\'uplevel\' metric source): '
                       'layer data CSV file \'notfound.csv\' not found. Exiting.\n')
 
     # Unit tests
