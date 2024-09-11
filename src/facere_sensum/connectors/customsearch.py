@@ -47,7 +47,7 @@ def get_raw(metric):
 
         if "nextPage" not in res["queries"]:
             print(
-                "Warning (customsearch metric source): "
+                "Warning ('customsearch' metric source): "
                 f"query '{query}' produced small number of search results"
             )
             return 0
