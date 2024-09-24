@@ -4,14 +4,14 @@
         {
             "id": "spartan race",
             "source": "customsearch",
-            "priority": 0.7,
+            "weight": 0.7,
             "num": 5,
             "URL": "https://www.spartan.com/"
         },
         {
             "id": "obstacle course racing",
             "source": "customsearch",
-            "priority": 0.3,
+            "weight": 0.3,
             "URL": "https://www.spartan.com/"
         }
     ]

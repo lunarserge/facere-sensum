@@ -17,21 +17,21 @@ import matplotlib.pyplot as plt
 
 VERSION = '0.0.5'
 
-def _compute_new_priorities(priorities, scores):
+def _compute_new_weights(weights, scores):
     '''
-    Compute new priorities so that lagging metrics get a bump,
-    but all the priorities still sum up to 1. Return a list with new priorities.
-    'priorities' is a list with previous priorities.
+    Compute new weights so that lagging metrics get a bump,
+    but all the weights still sum up to 1. Return a list with new weights.
+    'weights' is a list with previous weights.
     'scores' is a matching list with the scoring.
     '''
-    # For top performing metrics (the score is 1) the priority doesn't raise.
-    # For comletely failed metrics (the score is 0) the priority grows 2x.
+    # For top performing metrics (the score is 1) the weight doesn't raise.
+    # For comletely failed metrics (the score is 0) the weight grows 2x.
     # Or anything else in the middle depending on the metric value.
-    priorities = list(map(lambda priority,score: priority+(1-score)*priority, priorities, scores))
+    weights = list(map(lambda weight,score: weight+(1-score)*weight, weights, scores))
 
-    # Normalize so that priorities sup up to 1
-    coeff = sum(priorities)
-    return list(map(lambda priority: priority/coeff, priorities))
+    # Normalize so that weights sup up to 1
+    coeff = sum(weights)
+    return list(map(lambda weight: weight/coeff, weights))
 
 def command_create(config, log_file):
     '''
@@ -52,10 +52,10 @@ def command_create(config, log_file):
         row.append('Score')
         writer.writerow(row)
 
-        # Write first row with initial priorities.
+        # Write first row with initial weights.
         row = ['']
         for metric in config['metrics']:
-            row.append(metric['priority'])
+            row.append(metric['weight'])
             row.append('')
             row.append('')
         row.append('')
@@ -111,7 +111,7 @@ def _load_log(config):
 
 def command_update(config, log_file, marker):
     '''
-    Process the log file by scoring all the metrics and updating priorities for the future.
+    Process the log file by scoring all the metrics and updating weights for the future.
     Return combined score.
     'config' is project config in JSON form.
     'log_file' is the name for the log.
@@ -119,11 +119,11 @@ def command_update(config, log_file, marker):
     '''
     data = _load_log(config)
 
-    priorities = data.iloc[-1,1:-1:3] # pick priorities from the last row
-    priorities_combined = sum(priorities)
-    if abs(priorities_combined-1) > 0.001:
-        print("Warning: last row priorities don't sum up to 1 " \
-              f"(sum is ~{priorities_combined:.2f})\n")
+    weights = data.iloc[-1,1:-1:3] # pick weights from the last row
+    weights_combined = sum(weights)
+    if abs(weights_combined-1) > 0.001:
+        print("Warning: last row weights don't sum up to 1 " \
+              f"(sum is ~{weights_combined:.2f})\n")
 
     print(f'\nScoring for {marker}:')
     metrics = config['metrics']
@@ -134,7 +134,7 @@ def command_update(config, log_file, marker):
     _print_report(metrics, scores)
 
     norm_scores = [score[1] for score in scores]
-    score_comb = np.dot(priorities, norm_scores)
+    score_comb = np.dot(weights, norm_scores)
     print(f'\nYour combined score for {marker} is ~{score_comb:.2f}')
 
     # Populate date and scores in the last row in preparation for the log file update.
@@ -144,17 +144,17 @@ def command_update(config, log_file, marker):
     data.iloc[-1,-1] = score_comb
 
     if 'weights' in config and config['weights'] == 'dynamic':
-        priorities = _compute_new_priorities(priorities, norm_scores)
-        print('\nYour new priorities are:')
-        pairs = list(zip([metric['id'] for metric in metrics], priorities))
+        weights = _compute_new_weights(weights, norm_scores)
+        print('\nYour new metric weights are:')
+        pairs = list(zip([metric['id'] for metric in metrics], weights))
         pairs.sort(key=lambda pair: pair[1], reverse=True)
-        for (metric,priority) in pairs:
-            print(f'  - {metric}: {priority:.2f}')
+        for (metric,weight) in pairs:
+            print(f'  - {metric}: {weight:.2f}')
 
-    # Create a new row and store new priorities in it.
+    # Create a new row and store new weights in it.
     new_row = [''] # date is empty
-    for priority in priorities:
-        new_row.append(priority)
+    for weight in weights:
+        new_row.append(weight)
         # Individual scores are zero until measured: raw and normalized.
         new_row.append(0)
         new_row.append(0)

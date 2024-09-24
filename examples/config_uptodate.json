@@ -3,26 +3,26 @@
     "metrics": [
         {
             "id": "From Late Nov",
-            "priority": 0.3,
+            "weight": 0.3,
             "source": "uptodate",
             "updated": "2023-11-21"
         },
         {
             "id": "From Start of Feb",
-            "priority": 0.3,
+            "weight": 0.3,
             "source": "uptodate",
             "updated": "2024-02-01",
             "target": 100
         },
         {
             "id": "From Long Time Back",
-            "priority": 0.2,
+            "weight": 0.2,
             "source": "uptodate",
             "updated": "2021-02-02"
         },
         {
             "id": "GitHub location",
-            "priority": 0.2,
+            "weight": 0.2,
             "source": "uptodate",
             "method": "github.com",
             "path": "lunarserge/facere-sensum/examples/config_personal.json"

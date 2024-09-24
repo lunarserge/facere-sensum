@@ -4,17 +4,17 @@
     "metrics": [
         {
             "id": "Self-Development",
-            "priority": 0.4,
+            "weight": 0.4,
             "source": "user"
         },
         {
             "id": "Family Time",
-            "priority": 0.3,
+            "weight": 0.3,
             "source": "user"
         },
         {
             "id": "Job Deliverables",
-            "priority": 0.3,
+            "weight": 0.3,
             "source": "user"
         }
     ]
