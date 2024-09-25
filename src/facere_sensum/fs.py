@@ -238,16 +238,18 @@ def main():
         sys.exit(1)
 
     log = config['log']
-    if args.command == 'create':
-        command_create(config, log)
-    elif args.command == 'update':
-        command_update(config, log, datetime.date.today())
-        print('\nSee you next time!')
-    elif args.command == 'chart':
-        command_chart(config)
-    else: # pragma: no cover
-        # Should never get here given that all the actions are processed above.
-        print('Something weird happened.',
-              'Please submit an issue at https://github.com/lunarserge/facere-sensum/issues/new',
-              'with the command that led here.')
-        sys.exit(1)
+    match args.command:
+        case 'create':
+            command_create(config, log)
+        case 'update':
+            command_update(config, log, datetime.date.today())
+            print('\nSee you next time!')
+        case 'chart':
+            command_chart(config)
+        case _: # pragma: no cover
+            # Should never get here given that all the actions are processed above.
+            print('Something weird happened.',
+                  'Please submit an issue at',
+                  'https://github.com/lunarserge/facere-sensum/issues/new',
+                  'with the command that led here.')
+            sys.exit(1)
