@@ -7,7 +7,7 @@ Common functionality for GitHub metric sources.
 import github
 from facere_sensum import fs
 
-_token = fs.get_3rd_party_entry("GitHub", "personal access token")
+_token = fs.get_3rd_party_auth("GitHub", "personal access token")
 g = github.Github(auth=github.Auth.Token(_token) if _token else None)
 
 

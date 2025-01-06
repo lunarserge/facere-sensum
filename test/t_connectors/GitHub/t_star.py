@@ -6,7 +6,7 @@ Data connector for GitHub stars - testing support.
 
 from os import path
 import json
-from facere_sensum.connectors.GitHub import star
+from facere_sensum.sources.GitHub import star
 
 def test():
     '''

@@ -6,7 +6,7 @@ Data connector for GitHub forks - testing support.
 
 from os import path
 import json
-from facere_sensum.connectors.GitHub import fork
+from facere_sensum.sources.GitHub import fork
 
 def test():
     '''

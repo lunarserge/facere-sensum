@@ -6,7 +6,7 @@ Data connector for Google Custom Search API - testing support.
 
 from os import path
 import json
-from facere_sensum.connectors import customsearch
+from facere_sensum.sources import customsearch
 
 # Load mock response from the Custom Search API.
 with open(path.join('test', 'input', 'customsearch.json'), encoding='utf-8') as cs_file:

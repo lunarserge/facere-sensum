@@ -4,7 +4,7 @@
 Data connector for direct user input - testing support.
 '''
 
-from facere_sensum.connectors import user
+from facere_sensum.sources import user
 
 def test():
     '''
