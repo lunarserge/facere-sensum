@@ -7,7 +7,7 @@ Data connector for tracking assets to be up-to-date - testing support.
 from os import path
 import json
 from datetime import date
-from facere_sensum.connectors import uptodate
+from facere_sensum.sources import uptodate
 
 def test():
     '''

@@ -6,7 +6,7 @@ Data connector for upleveling collective metric behavior to a higher-level - tes
 
 from os import path
 import json
-from facere_sensum.connectors import uplevel
+from facere_sensum.sources import uplevel
 
 def test():
     '''

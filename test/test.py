@@ -12,7 +12,7 @@ import json
 import shutil
 import unittest
 from facere_sensum import fs
-from facere_sensum.connectors import user as user_connector
+from facere_sensum.sources import user as user_connector
 
 # Generate paths for test files.
 _CONFIG_PATH      = os.path.join('examples', 'config_personal.json')
@@ -50,7 +50,7 @@ class Test(unittest.TestCase):
         '''
         Test facere_sensum.command_create function.
         '''
-        fs.command_create(_CONFIG, _LOG_PATH)
+        fs.command_create(_CONFIG)
         self.assertTrue(_logs_equal(_LOG_PATH, _REF_BASE_PATH))
 
     def test_score_combined(self):
@@ -61,15 +61,15 @@ class Test(unittest.TestCase):
 
         # Minimal extreme: all metrics are zero.
         _mock_up_direct_user_input([0,0,0])
-        fs.command_update(_CONFIG, _LOG_PATH, 'A')
+        fs.command_update(_CONFIG, 'A')
 
         # Maximal extreme: all metrics are one.
         _mock_up_direct_user_input([1,1,1])
-        fs.command_update(_CONFIG, _LOG_PATH, 'B')
+        fs.command_update(_CONFIG, 'B')
 
         # Various values for metrics.
         _mock_up_direct_user_input([.25,.5,.75])
-        fs.command_update(_CONFIG, _LOG_PATH, 'C')
+        fs.command_update(_CONFIG, 'C')
 
         # Compare with a reference.
         self.assertTrue(_logs_equal(_LOG_PATH, _REF_UPDATED_PATH))
@@ -132,10 +132,10 @@ if __name__ == '__main__':
 
     _test_integration('Authentication config not found',
                       ['--auth', 'notfound.json', 'update'],
-                      None, 'Authentication config file \'notfound.json\' not found. Exiting.\n')
+                      None, 'Authentication config \'notfound.json\' not found. Exiting.\n')
     _test_integration('Project config not found',
                       ['--config', 'notfound.json', 'update'],
-                      None, 'Project config file \'notfound.json\' not found. Exiting.\n')
+                      None, 'Layer config \'notfound.json\' not found. Exiting.\n')
     _test_integration('Uplevel connector log file not found',
                       ['--config',
                        os.path.join('test', 'input', 'config_uplevel_notfound.json'),

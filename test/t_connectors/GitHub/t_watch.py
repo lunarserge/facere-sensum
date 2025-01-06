@@ -6,7 +6,7 @@ Data connector for GitHub watchers - testing support.
 
 from os import path
 import json
-from facere_sensum.connectors.GitHub import watch
+from facere_sensum.sources.GitHub import watch
 
 def test():
     '''
