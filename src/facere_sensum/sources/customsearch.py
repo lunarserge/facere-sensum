@@ -10,9 +10,10 @@ from facere_sensum import fs
 # Default number of search results to consider.
 _NUM = 20
 
-_auth = fs.auth["Google"]
 _cse = build(  # pylint: disable=E1101
-    "customsearch", "v1", developerKey=_auth["custom search API key"]
+    "customsearch",
+    "v1",
+    developerKey=fs.get_3rd_party_auth("Google", "custom search API key"),
 ).cse()
 
 
@@ -24,7 +25,9 @@ def invoke_cse(
     Invoke Custom Search API with specified query and index of the first result to return.
     Keep this function separate so that testing scripts can substitute with a mockup.
     """
-    return _cse.list(q=query, cx=_auth["search engine ID"], start=start).execute()
+    return _cse.list(
+        q=query, cx=fs.get_3rd_party_auth("Google", "search engine ID"), start=start
+    ).execute()
 
 
 def get_raw(metric):
