@@ -149,8 +149,11 @@ def _test_integration(descr, args, ref_out, ref_err=""):
 
 
 if __name__ == "__main__":
-    print("Integration tests:")
+    print("\nUnit tests:")
+    if not unittest.main(exit=False, failfast=True).result.wasSuccessful():
+        sys.exit(1)
 
+    print("\nIntegration tests:")
     layer_config = os.path.join("examples", "config_uplevel.json")
     _test_integration(
         "'create' command", ["--config", layer_config, "create"], "log.csv is created\n"
@@ -188,6 +191,3 @@ if __name__ == "__main__":
         "Error ('uplevel' metric source): "
         "layer data CSV file 'notfound.csv' not found. Exiting.\n",
     )
-
-    # Unit tests
-    unittest.main()
