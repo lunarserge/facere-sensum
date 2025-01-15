@@ -26,16 +26,17 @@ jobs:
       - name: Run Black code format checker
         run: |
           pip install black
-          black --check src test
+          black --check src test doc fsy.py
       - name: Run Pylint static code analyser
         run: |
           pip install coverage pylint
-          pylint src/facere_sensum test fsy.py
+          pylint src/facere_sensum test doc fsy.py
       - name: Run Bandit security analyser
         run: |
           pip install bandit
-          bandit -r src/facere_sensum
+          bandit -r src
           bandit -r test
+          bandit -r doc
           bandit fsy.py
       - name: Dry-run Sphinx documentation generator
         run: |
