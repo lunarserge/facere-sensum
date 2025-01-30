@@ -1,0 +1,10 @@
+{
+    "log": "log_validlink.csv",
+    "metrics": [
+        {
+            "id": "example validlink",
+            "source": "validlink",
+            "URL": "https://www.example.com/"
+        }
+    ]
+}
